@@ -1,0 +1,81 @@
+<!--
+   index.html (Html helper)
+   Version 1 2015 Vibhaas <vibhaas@gmail.com>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Html helper</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<link href="styles.css" rel="stylesheet">
+<script src="jquery-1.11.2.min.js"></script>
+<script src="scripts.js"></script>
+</head>
+<body onload="run();">
+<div class="container">
+<div id="sidebar">
+<ul>
+	<li><a href="#" class="select" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#about').removeClass('x');">About</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#basic-info').removeClass('x');">Basic Info</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#html').removeClass('x');">HTML</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#js').removeClass('x');">Java Script</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#css').removeClass('x');">CSS</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#display').removeClass('x');run('y');">Preview</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#code').removeClass('x');run('n');">Code</a></li>
+	<li><a href="http://www.w3schools.com/" target="_blank">Learn HTML/JS/CSS</a></li>
+</ul>
+</div>
+<div class="main-content">
+<div class="content">
+<section id="about">
+<h1>Html Helper</h1>
+<p>This Html helper is made for helping in making HTML pages. It supports Javascript and CSS also.</p>
+</section>
+<section id="basic-info" class="x">
+<h1>Basic Info</h1>
+<form>
+Title: <input type="text" id="title" value="untitled"><br>
+Background color: <input type="text" id="bg" value="white"><br>
+Text color: <input type="text" id="fg" value="black"><br>
+Font family: <input type="text" id="ff" value="Helvetica"><br>
+Link color: <input type="text" id="l" value="blue"><br>
+Visited link color: <input type="text" id="vl" value="purple"><br>
+Hovered link color: <input type="text" id="hl" value="blue"><br>
+Active link color: <input type="text" id="al" value="purple"><br>
+</form>
+</section>
+<section id="html" class="x">
+<h1>HTML</h1>
+<form>
+<textarea id="thehtml">Just a test..</textarea>
+</form>
+</section>
+<section id="js" class="x">
+<h1>Java Script</h1>
+<form>
+<textarea id="thejs"></textarea>
+</form>
+</section>
+<section id="css" class="x">
+<h1>CSS</h1>
+<form>
+<textarea id="thecss"></textarea>
+</form>
+</section>
+<section id="display" class="x">
+<h1>Preview</h1>
+<form>
+<iframe id="dis"></iframe>
+</form>
+</section>
+<section id="code" class="x">
+<h1>Code</h1>
+<form>
+<iframe id="thecode"></iframe>
+</form>
+</section>
+</div>
+</div>
+</div>
+</body>
+</html>
