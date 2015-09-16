@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TEXT STYLER</title>
+<script>
+function display()   {
+     var form = document.forms[0];
+     var format = form.toDisplay.value;
+
+     format = (form.blink.checked) ? format.blink() : format;
+     format = (form.big.checked) ? format.big() : format;
+     format = (form.bold.checked) ? format.bold() : format;
+     format = (form.fixed.checked) ? format.fixed() : format;
+     format = (form.italics.checked) ? format.italics() : format;
+     format = (form.small.checked) ? format.small() : format;
+     format = (form.strike.checked) ? "<del>"+format+"</del>" : format;
+     format = (form.sup.checked) ? format.sup() : format;
+     format = (form.sub.checked) ? format.sub() : format;
+     format = (form.span.checked) ? "<span>"+format+"</span>" : format;
+     format = (form.para.checked) ? "<p>"+format+"</p>" : format;
+     format = (form.div.checked) ? "<div>"+format+"</div>" : format;
+     format = (form.underline.checked) ? "<u>"+format+"</u>" : format;
+     format = (form.center.checked) ? "<center>"+format+"</center>" : format;
+     format = (form.h.checked) ? "<h"+form.hn.value+">"+format+"</h"+form.hn.value+">" : format;
+     format = (form.col.checked & form.color.value != "") ? format.fontcolor(form.color.value) : format;
+     format = (form.siz.checked & form.size.value != "") ? format.fontsize(form.size.value) : format;
+
+     var result = "<center>The HTML Code: <br><xmp style='overflow-x: scroll;'>"+format+"</xmp><br> looks like:<br></center>"+format;
+	parent.write(parent.document.getElementById('out'), result);
+}
+</script>
+</head>
+<body onLoad="display()">
+<form>
+<textarea name="toDisplay" rows="10" cols="35" wrap="soft" onkeyup="display()">Sample...</textarea><br>
+<input type="checkbox" name="big" onClick="display()">Big<br>
+<input type="checkbox" name="blink" onClick="display()">Blinking<br>
+<input type="checkbox" name="bold" onClick="display()">Bold<br>
+<input type="checkbox" name="fixed" onClick="display()">Fixed Width<br>
+<input type="checkbox" name="italics" onClick="display()">Italics<br>
+<input type="checkbox" name="small" onClick="display()">Small<br>
+<input type="checkbox" name="strike" onClick="display()">Striked Out<br>
+<input type="checkbox" name="sub" onClick="display()">Subscript<br>
+<input type="checkbox" name="sup" onClick="display()">Superscript<br>
+<input type="checkbox" name="span" onClick="display()">Span<br>
+<input type="checkbox" name="para" onClick="display()">Paragraph<br>
+<input type="checkbox" name="div" onClick="display()">Divison<br>
+<input type="checkbox" name="underline" onClick="display()">Underline<br>
+<input type="checkbox" name="center" onClick="display()">Center<br>
+<input type="checkbox" name="h" onClick="display()">Header: <select name="hn" onCLick="display()"><option value="1">One</option><option value="2">Two</option><option value="3">Three</option><option value="4">Four</option><option value="5">Five</option><option value="6">Six</option></select><br>
+<input type="checkbox" name="col" onClick="display()">Font color: <input type="text" name="color" value="black" onkeyup="display()"><br>
+<input type="checkbox" name="siz" onClick="display()">Font size: <select name="size" onCLick="display()"><option value="1">One</option><option value="2">Two</option><option value="3" selected>Three</option><option value="4">Four</option><option value="5">Five</option><option value="6">Six</option><option value="7">Seven</option></select>
+</form>
+</body>
+</html>
