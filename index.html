@@ -1,6 +1,6 @@
 <!--
    index.html (Html helper)
-   Version 1 2015 Vibhaas <vibhaas@gmail.com>
+   Version 1.2 2015 Vibhaas <vibhaas@gmail.com>
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,7 @@
 <ul>
 	<li><a href="#" class="select" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#about').removeClass('x');">About</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#basic-info').removeClass('x');">Basic Info</a></li>
+	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#text-styler').removeClass('x');">Text Styler</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#html').removeClass('x');">HTML</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#js').removeClass('x');">Java Script</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#css').removeClass('x');">CSS</a></li>
@@ -43,6 +44,11 @@ Visited link color: <input type="text" id="vl" value="purple"><br>
 Hovered link color: <input type="text" id="hl" value="blue"><br>
 Active link color: <input type="text" id="al" value="purple"><br>
 </form>
+</section>
+<section id="text-styler" class="x">
+<h1>Text styler</h1>
+<iframe src="txtstyler.html" name="choose" style="float:left;width:49%;"></iframe>
+<iframe src="" id="out" style="float:right;width:49%;"></iframe>
 </section>
 <section id="html" class="x">
 <h1>HTML</h1>
