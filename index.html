@@ -1,6 +1,6 @@
 <!--
    index.html (Html helper)
-   Version 1.2 2015 Vibhaas <vibhaas@gmail.com>
+   Version 1.4 2015 Vibhaas <vibhaas@gmail.com>
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,10 @@
 <link href="styles.css" rel="stylesheet">
 <script src="jquery-1.11.2.min.js"></script>
 <script src="scripts.js"></script>
+<script src="http://tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+<script>
+tinymce.init({selector:'textarea#thehtml'});
+</script>
 </head>
 <body onload="run();">
 <div class="container">
@@ -17,7 +21,6 @@
 <ul>
 	<li><a href="#" class="select" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#about').removeClass('x');">About</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#basic-info').removeClass('x');">Basic Info</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#text-styler').removeClass('x');">Text Styler</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#html').removeClass('x');">HTML</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#js').removeClass('x');">Java Script</a></li>
 	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#css').removeClass('x');">CSS</a></li>
@@ -45,15 +48,10 @@ Hovered link color: <input type="text" id="hl" value="blue"><br>
 Active link color: <input type="text" id="al" value="purple"><br>
 </form>
 </section>
-<section id="text-styler" class="x">
-<h1>Text styler</h1>
-<iframe src="txtstyler.html" name="choose" style="float:left;width:49%;"></iframe>
-<iframe src="" id="out" style="float:right;width:49%;"></iframe>
-</section>
 <section id="html" class="x">
 <h1>HTML</h1>
 <form>
-<textarea id="thehtml">Just a test..</textarea>
+<textarea id="thehtml" style="height:439px;"><p>Just a test..</p></textarea><br>
 </form>
 </section>
 <section id="js" class="x">
@@ -77,7 +75,7 @@ Active link color: <input type="text" id="al" value="purple"><br>
 <section id="code" class="x">
 <h1>Code</h1>
 <form>
-<iframe id="thecode"></iframe>
+<iframe id="thecode" style="border: 0;"></iframe>
 </form>
 </section>
 </div>
