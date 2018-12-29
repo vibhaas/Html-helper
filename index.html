@@ -1,85 +1,140 @@
 <!--
-   index.html (Html helper)
-   Version 1.4 2015 Vibhaas <vibhaas@gmail.com>
+	HTML Helper 2.0
+	Copyright Vibhaas Srivastava MIT License
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Html helper</title>
-<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-<link href="styles.css" rel="stylesheet">
-<script src="jquery-1.11.2.min.js"></script>
-<script src="scripts.js"></script>
-<script src="http://tinymce.cachefly.net/4.2/tinymce.min.js"></script>
-<script>
-tinymce.init({selector:'textarea#thehtml'});
-</script>
-</head>
-<body onload="run();">
-<div class="container">
-<div id="sidebar">
-<ul>
-	<li><a href="#" class="select" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#about').removeClass('x');">About</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#basic-info').removeClass('x');">Basic Info</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#html').removeClass('x');">HTML</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#js').removeClass('x');">Java Script</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#css').removeClass('x');">CSS</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#display').removeClass('x');run('y');">Preview</a></li>
-	<li><a href="#" onClick="$('a').removeClass('select');$(this).addClass('select');$('section').addClass('x');$('#code').removeClass('x');run('n');">Code</a></li>
-	<li><a href="http://www.w3schools.com/" target="_blank">Learn HTML/JS/CSS</a></li>
-</ul>
-</div>
-<div class="main-content">
-<div class="content">
-<section id="about">
-<h1>Html Helper</h1>
-<p>This Html helper is made for helping in making HTML pages. It supports Javascript and CSS also.</p>
-</section>
-<section id="basic-info" class="x">
-<h1>Basic Info</h1>
-<form>
-Title: <input type="text" id="title" value="untitled"><br>
-Background color: <input type="text" id="bg" value="white"><br>
-Text color: <input type="text" id="fg" value="black"><br>
-Font family: <input type="text" id="ff" value="Helvetica"><br>
-Link color: <input type="text" id="l" value="blue"><br>
-Visited link color: <input type="text" id="vl" value="purple"><br>
-Hovered link color: <input type="text" id="hl" value="blue"><br>
-Active link color: <input type="text" id="al" value="purple"><br><br>
-</form>
-</section>
-<section id="html" class="x">
-<h1>HTML</h1>
-<form>
-<textarea id="thehtml" style="height:439px;"><p>Just a test..</p></textarea><br>
-</form>
-</section>
-<section id="js" class="x">
-<h1>Java Script</h1>
-<form>
-<textarea id="thejs"></textarea>
-</form>
-</section>
-<section id="css" class="x">
-<h1>CSS</h1>
-<form>
-<textarea id="thecss"></textarea>
-</form>
-</section>
-<section id="display" class="x">
-<h1>Preview</h1>
-<form>
-<iframe id="dis"></iframe>
-</form>
-</section>
-<section id="code" class="x">
-<h1>Code</h1>
-<form>
-<iframe id="thecode" style="border: 0;"></iframe>
-</form>
-</section>
-</div>
-</div>
-</div>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<title>Html Helper</title>
+		<!-- CSS -->
+    <link rel="stylesheet" href="assets/css/materialize.min.css">
+		<style media="screen">
+			@font-face {
+			  font-family: 'Material Icons';
+			  font-style: normal;
+			  font-weight: 400;
+			  src: url(assets/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+			  src: local('Material Icons'),
+			    local('MaterialIcons-Regular'),
+			    url(assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+			    url(assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+			    url(assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+			}
+			.material-icons {
+			  font-family: 'Material Icons';
+			  font-weight: normal;
+			  font-style: normal;
+			  font-size: 24px;  /* Preferred icon size */
+			  display: inline-block;
+			  line-height: 1;
+			  text-transform: none;
+			  letter-spacing: normal;
+			  word-wrap: normal;
+			  white-space: nowrap;
+			  direction: ltr;
+
+			  /* Support for all WebKit browsers. */
+			  -webkit-font-smoothing: antialiased;
+			  /* Support for Safari and Chrome. */
+			  text-rendering: optimizeLegibility;
+
+			  /* Support for Firefox. */
+			  -moz-osx-font-smoothing: grayscale;
+
+			  /* Support for IE. */
+			  font-feature-settings: 'liga';
+			}
+			html, body {
+				height: 100%;
+				width: 100%;
+			}
+			.info {
+				border-bottom-left-radius: 90px;
+				border-bottom-right-radius: 90px;
+				margin-top: 50px;
+			}
+			.pane-container {
+				height: 90%;
+				margin-top: 10px;
+				width: 100%;
+			}
+			.pane {
+				border: 1px solid #eee;
+				border-radius: 5px;
+				padding: 5px;
+				height: 100%;
+				width: 50%;
+			}
+			.inpane {
+				height: 100%;
+				width: 100%:
+			}
+		</style>
+    <!-- JavaScript -->
+		<script src="assets/js/jquery-3.3.1.min.js"></script>
+		<script src="assets/js/materialize.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('.sidenav').sidenav();
+				$('.tabs').tabs();
+			});
+		</script>
+	</head>
+	<body>
+		<nav>
+		    <div class="nav-wrapper teal">
+		      <a href="#!" class="brand-logo center">HTML HELPER</a>
+					<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		      <ul class="left hide-on-med-and-down">
+						<ul class="tabs tabs-transparent" style="height:60px">
+			        <li class="tab" class="active"><a href="#html" class="active">HTML</a></li>
+			        <li class="tab"><a href="#css">CSS</a></li>
+			        <li class="tab"><a href="#js">JavaScript</a></li>
+						</ul>
+		      </ul>
+					<ul class="right hide-on-med-and-down">
+						<ul class="tabs tabs-transparent large" style="height:60px">
+							<li class="tab"><a href="#settings"><i class="material-icons">settings</i></a></li>
+							<li class="tab"><a href="#search"><i class="material-icons">search</i></a></li>
+							<li class="tab"><a href="#tutorial"><i class="material-icons">style</i></a></li>
+							<li class="tab"><a href="#code"><i class="material-icons">code</i></a></li>
+							<li class="tab"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
+						</ul>
+		      </ul>
+		    </div>
+		  </nav>
+			<ul class="sidenav" id="mobile-demo">
+				<ul class="tabs">
+					<li class="tab"><a href="#html" class="active">HTML</a></li>
+					<li class="tab"><a href="#css">CSS</a></li>
+					<li class="tab"><a href="#js">JavaScript</a></li>
+				</ul>
+				<div class="row">
+					<div class="col s12">
+						<ul class="tabs">
+							<li class="tab col s2"><a href="#settings"><i class="material-icons">settings</i></a></li>
+							<li class="tab col s2"><a href="#search"><i class="material-icons">search</i></a></li>
+							<li class="tab col s2"><a href="#tutorial"><i class="material-icons">style</i></a></li>
+							<li class="tab col s2"><a href="#code"><i class="material-icons">code</i></a></li>
+							<li class="tab col s2"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
+						</ul>
+					</div>
+				</div>
+			</ul>
+			<div class="row pane-container">
+				<div class="col s6 pane">
+					<div id="html" class="col s12 inpane">HTML CODE HERE</div>
+					<div id="css" class="col s12 inpane">CSS HERE</div>
+					<div id="js" class="col s12 inpane">JS HERE</div>
+				</div>
+				<div class="col s6 pane">
+					<div id="settings" class="col s12 inpane">settings</div>
+					<div id="search" class="col s12 inpane"><iframe src="https://www.google.com" class="inpane" width="100%" frameborder="0"></iframe></div>
+					<div id="tutorial" class="col s12 inpane">TUTORIALS</div>
+					<div id="code" class="col s12 inpane">code</div>
+					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0"></iframe></div>
+				</div>
+			</div>
+	</body>
 </html>
