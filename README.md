@@ -13,7 +13,7 @@ npm install
 
 ## Web Version
 
-This can be run straight in the browser - to do so, extract the `.zip` file and run `index.html` or use it straight from Github here: [https://vibhaas.github.io/Html-Helper](https://vibhaas.github.io/Html-Helper)
+This can be run straight in the browser - to do so, extract the `.zip` file and run `index.html` or use it straight from Github here: [https://vibhaas.github.io/Html-Helper](https://vibhaas.github.io/Html-Helper/index.html)
 
 ## Tech/Frameworks
 * This app is made with HTML, CSS and JS. It implements [Ace editor](https://ace.c9.io/), Materialize, Material Icons and Jquery.
