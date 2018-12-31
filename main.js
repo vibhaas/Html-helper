@@ -10,7 +10,7 @@ let mainWindow;
 app.on('ready', function(){
   // create new window
   mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1200,
     height: 900
   });
   // load html file
