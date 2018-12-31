@@ -1,2 +1,4 @@
 # Ignoring node modules
 **/node_modules
+# Ignoring release-builds
+**/release-builds
