@@ -70,11 +70,62 @@
 				height: 100%;
 				width: 100%:
 			}
+			.editor {
+					height: 100%;
+					width: 100%;
+					font-size: 20px;
+			}
+			#metadata {
+				height: 40%;
+			}
+			.card {
+				height: 59%;
+		    overflow-y: scroll;
+			}
 		</style>
     <!-- JavaScript -->
 		<script src="assets/js/jquery-3.3.1.min.js"></script>
 		<script src="assets/js/materialize.min.js"></script>
 		<script>
+			function write(iframe, content)	{
+				iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+				iframe.document.open();
+				iframe.document.write(content);
+				iframe.document.close();
+			}
+			function update()	{
+				var page = "<!DOCTYPE html>\n<html>\n<head>\n<title>"+$("#title").get(0).value+"</title>\n<style>\n"+csseditor.getValue()+"\n</style>\n<script>\n"+jseditor.getValue()+"\n</"+"script>\n"+metadata.getValue()+"\n</head>\n<body>\n"+htmleditor.getValue()+"\n</body>\n</html>";
+				write($('#display').get(0), page);
+				codedisplay.setValue(page);
+			}
+			function include(type, link){
+				if(type == 'js'){
+					metadata.setValue(metadata.getValue()+"\n<script src=\""+link+"\"></"+"script>");
+					update();
+					return true;
+				}
+				else if(type == 'css'){
+					metadata.setValue(metadata.getValue()+"\n<link rel=\"stylesheet\" href=\""+link+"\">");
+					update();
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			function save(){
+				localStorage.html = htmleditor.getValue();
+				localStorage.css = csseditor.getValue();
+				localStorage.js = jseditor.getValue();
+				localStorage.metadata = metadata.getValue();
+				update();
+			}
+			function open(){
+				htmleditor.session.setValue(localStorage.html || "");
+				csseditor.session.setValue(localStorage.css || "");
+				jseditor.session.setValue(localStorage.js || "");
+				metadata.session.setValue(localStorage.metadata || "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");
+			}
 			$(document).ready(function(){
 				$('.sidenav').sidenav();
 				$('.tabs').tabs();
@@ -96,9 +147,7 @@
 					<ul class="right hide-on-med-and-down">
 						<ul class="tabs tabs-transparent large" style="height:60px">
 							<li class="tab"><a href="#settings"><i class="material-icons">settings</i></a></li>
-							<li class="tab"><a href="#search"><i class="material-icons">search</i></a></li>
-							<li class="tab"><a href="#tutorial"><i class="material-icons">style</i></a></li>
-							<li class="tab"><a href="#code"><i class="material-icons">code</i></a></li>
+							<li class="tab"><a href="#codearea"><i class="material-icons">code</i></a></li>
 							<li class="tab"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
 						</ul>
 		      </ul>
@@ -113,28 +162,239 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="tabs">
-							<li class="tab col s2"><a href="#settings"><i class="material-icons">settings</i></a></li>
-							<li class="tab col s2"><a href="#search"><i class="material-icons">search</i></a></li>
-							<li class="tab col s2"><a href="#tutorial"><i class="material-icons">style</i></a></li>
-							<li class="tab col s2"><a href="#code"><i class="material-icons">code</i></a></li>
-							<li class="tab col s2"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
+							<li class="tab col s4"><a href="#settings"><i class="material-icons">settings</i></a></li>
+							<li class="tab col s4"><a href="#codearea"><i class="material-icons">code</i></a></li>
+							<li class="tab col s4"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
 						</ul>
 					</div>
 				</div>
 			</ul>
 			<div class="row pane-container">
 				<div class="col s6 pane">
-					<div id="html" class="col s12 inpane">HTML CODE HERE</div>
-					<div id="css" class="col s12 inpane">CSS HERE</div>
-					<div id="js" class="col s12 inpane">JS HERE</div>
+					<div id="html" class="col s12 inpane"><pre class="editor" id="htmleditor"></pre></div>
+					<div id="css" class="col s12 inpane"><pre class="editor" id="csseditor"></pre></div>
+					<div id="js" class="col s12 inpane"><pre class="editor" id="jseditor"></pre></div>
 				</div>
 				<div class="col s6 pane">
-					<div id="settings" class="col s12 inpane">settings</div>
-					<div id="search" class="col s12 inpane"><iframe src="https://www.google.com" class="inpane" width="100%" frameborder="0"></iframe></div>
-					<div id="tutorial" class="col s12 inpane">TUTORIALS</div>
-					<div id="code" class="col s12 inpane">code</div>
-					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0"></iframe></div>
+					<div id="settings" class="col s12 inpane">
+						  <div class="card">
+						    <div class="card-content">
+						      <center><h1>SETTINGS</h1></center>
+						    </div>
+						    <div class="card-tabs">
+						      <ul class="tabs tabs-fixed-width">
+						        <li class="tab"><a href="#eset">Editor</a></li>
+						        <li class="tab"><a class="active" href="#pset">Page</a></li>
+						        <li class="tab"><a href="#pinfo">About</a></li>
+						      </ul>
+						    </div>
+						    <div class="card-content grey lighten-4">
+						      <div id="eset">
+										SLFSDFKDSFGSL
+									</div>
+						      <div id="pset">
+										<div class="input-field col s12">
+						          <input id="title" type="text" class="validate" onchange="update();">
+						          <label for="title">Page Title</label>
+						        </div>
+										 <h5>HEAD METADTA</h5>
+										<div class="input-field">
+						          <input id="include" type="text" class="validate">
+						          <label for="include">Include Link</label>
+						        </div>
+										<div class="col s8">
+									    <select class="browser-default" id="inctype">
+									      <option value="js">Javascript</option>
+									      <option value="css">CSS</option>
+									    </select>
+									    <label>Type</label>
+									  </div>
+										<a class="waves-effect waves-light btn right" onclick="include($('#inctype').get(0).value, $('#include').get(0).value);"><i class="material-icons left">done</i>INCLUDE</a><br><br>
+										<br><p><em><br>Include scripts or styles here, for example JQuery or bootstrap. To edit the <code>&lt;head&gt;</code> directly, do it below<i class="material-icons">arrow_downward</i></em></p>
+									</div>
+						      <div id="pinfo">
+										<p><i class="material-icons">copyright</i> 2019 Vibhaas Srivastava MIT LICENSE</p><br>
+										<p>HTML Helper was created with the aim of helping people write HTML code(especially in my school) and because I wanted to write in my own editor!</p>
+										<strong>Check it out on github: </strong><a class="waves-effect waves-light btn" href="https://github.com/vibhaas/Html-helper/" target="_blank"><i class="material-icons left">open_in_new</i>Github</a><br><br><hr>
+										<p><strong>Copyright 2019 Vibhaas Srivastava<br>
+										<br><em>
+										Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+										<br>
+										The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+										<br>
+										THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</em></strong></p>
+									</div>
+						    </div>
+						  </div>
+							<pre class="editor" id="metadata"></pre>
+					</div>
+					<div id="codearea" class="col s12 inpane"><pre class="editor" id="codedisplay"></pre></div>
+					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0" id="display"></iframe></div>
 				</div>
 			</div>
+			<!-- load ace -->
+			<script src="assets/ace/src-noconflict/ace.js"></script>
+			<!-- load ace language tools -->
+			<script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
+			<script>
+			    // ace variables
+					var theme = "ace/theme/clouds_midnight";
+					var tabSize = 2;
+					var wordWrapping = true;
+					var softTab = false;
+					var highlightLine = true;
+					var printMargin = true;
+					var autoSave = false;
+					// creating the editors
+			    ace.require("ace/ext/language_tools");
+					var htmleditor = ace.edit("htmleditor");
+					htmleditor.session.setMode("ace/mode/html");
+					htmleditor.setTheme(theme);
+					htmleditor.session.setTabSize(tabSize);
+					htmleditor.session.setUseWrapMode(wordWrapping);
+					htmleditor.session.setUseSoftTabs(softTab);
+					htmleditor.setHighlightActiveLine(highlightLine);
+					htmleditor.setShowPrintMargin(printMargin);
+					var csseditor = ace.edit("csseditor");
+					csseditor.session.setMode("ace/mode/css");
+					csseditor.setTheme(theme);
+					csseditor.session.setTabSize(tabSize);
+					csseditor.session.setUseWrapMode(wordWrapping);
+					csseditor.session.setUseSoftTabs(softTab);
+					csseditor.setHighlightActiveLine(highlightLine);
+					csseditor.setShowPrintMargin(printMargin);
+			    var jseditor = ace.edit("jseditor");
+			    jseditor.session.setMode("ace/mode/javascript");
+			    jseditor.setTheme(theme);
+					jseditor.session.setTabSize(tabSize);
+					jseditor.session.setUseWrapMode(wordWrapping);
+					jseditor.session.setUseSoftTabs(softTab);
+					jseditor.setHighlightActiveLine(highlightLine);
+					jseditor.setShowPrintMargin(printMargin);
+			    var codedisplay = ace.edit("codedisplay");
+			    codedisplay.session.setMode("ace/mode/html");
+			    codedisplay.setTheme(theme);
+					codedisplay.session.setTabSize(tabSize);
+					codedisplay.session.setUseWrapMode(wordWrapping);
+					codedisplay.session.setUseSoftTabs(softTab);
+					codedisplay.setHighlightActiveLine(false);
+					codedisplay.setShowPrintMargin(printMargin);
+					codedisplay.setReadOnly(true);
+					var metadata = ace.edit("metadata");
+			    metadata.session.setMode("ace/mode/html");
+			    metadata.setTheme(theme);
+					metadata.session.setTabSize(tabSize);
+					metadata.session.setUseWrapMode(wordWrapping);
+					metadata.session.setUseSoftTabs(softTab);
+					metadata.setHighlightActiveLine(highlightLine);
+					metadata.setShowPrintMargin(printMargin);
+			    // enable autocompletion and snippets
+			    htmleditor.setOptions({
+			        enableBasicAutocompletion: true,
+			        enableSnippets: true,
+			        enableLiveAutocompletion: true
+			    });
+					csseditor.setOptions({
+			        enableBasicAutocompletion: true,
+			        enableSnippets: true,
+			        enableLiveAutocompletion: true
+			    });
+					jseditor.setOptions({
+							enableBasicAutocompletion: true,
+							enableSnippets: true,
+							enableLiveAutocompletion: true
+					});
+					metadata.setOptions({
+							enableBasicAutocompletion: true,
+							enableSnippets: true,
+							enableLiveAutocompletion: true
+					});
+					open();
+					update();
+					htmleditor.session.on('change', function(delta) {
+    				update();
+						if(autoSave == true){
+							save();
+						}
+					});
+					csseditor.session.on('change', function(delta) {
+				    update();
+						if(autoSave == true){
+							save();
+						}
+					});
+					jseditor.session.on('change', function(delta) {
+						update();
+						if(autoSave == true){
+							save();
+						}
+					});
+					metadata.session.on('change', function(delta) {
+						update();
+						if(autoSave == true){
+							save();
+						}
+					});
+					htmleditor.commands.addCommand({
+							name: "save",
+							exec: save,
+							bindKey: { win: "ctrl-s", mac: "cmd-s" }
+					});
+					htmleditor.commands.addCommand({
+							name: "undo",
+							exec: htmleditor.undo(),
+							bindKey: { win: "ctrl-z", mac: "cmd-z" }
+					});
+					htmleditor.commands.addCommand({
+							name: "redo",
+							exec: htmleditor.redo(),
+							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
+					});
+					csseditor.commands.addCommand({
+							name: "save",
+							exec: save,
+							bindKey: { win: "ctrl-s", mac: "cmd-s" }
+					});
+					csseditor.commands.addCommand({
+							name: "undo",
+							exec: csseditor.undo(),
+							bindKey: { win: "ctrl-z", mac: "cmd-z" }
+					});
+					csseditor.commands.addCommand({
+							name: "redo",
+							exec: csseditor.redo(),
+							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
+					});
+					jseditor.commands.addCommand({
+							name: "save",
+							exec: save,
+							bindKey: { win: "ctrl-s", mac: "cmd-s" }
+					});
+					jseditor.commands.addCommand({
+							name: "undo",
+							exec: jseditor.undo(),
+							bindKey: { win: "ctrl-z", mac: "cmd-z" }
+					});
+					jseditor.commands.addCommand({
+							name: "redo",
+							exec: jseditor.redo(),
+							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
+					});
+					metadata.commands.addCommand({
+							name: "save",
+							exec: save,
+							bindKey: { win: "ctrl-s", mac: "cmd-s" }
+					});
+					metadata.commands.addCommand({
+							name: "undo",
+							exec: metadata.undo(),
+							bindKey: { win: "ctrl-z", mac: "cmd-z" }
+					});
+					metadata.commands.addCommand({
+							name: "redo",
+							exec: metadata.redo(),
+							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
+					});
+			</script>
 	</body>
 </html>
