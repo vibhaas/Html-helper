@@ -84,8 +84,12 @@
 			}
 		</style>
     <!-- JavaScript -->
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 		<script src="assets/js/jquery-3.3.1.min.js"></script>
 		<script src="assets/js/materialize.min.js"></script>
+		<script src="assets/ace/src-noconflict/ace.js"></script>
+		<script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
+		<script>if (window.module) module = window.module;</script>
 		<script>
 			function write(iframe, content)	{
 				iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
@@ -345,6 +349,7 @@
 										<div class="col s6">
 											<p>(Auto Save save's after every edit)</p>
 										</div>
+										<p><em>Settings save automatically!</em></p>
 									</div>
 						      <div id="pset">
 										<div class="input-field col s12">
@@ -386,10 +391,6 @@
 					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0" id="display"></iframe></div>
 				</div>
 			</div>
-			<!-- load ace -->
-			<script src="assets/ace/src-noconflict/ace.js"></script>
-			<!-- load ace language tools -->
-			<script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
 			<script>
 			    // ace variables
 					var theme = "ace/theme/" + localStorage.theme || "tomorrow";
