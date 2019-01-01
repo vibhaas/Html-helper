@@ -10,8 +10,9 @@ let mainWindow;
 app.on('ready', function(){
   // create new window
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 900
+    width: 1281,
+    height: 800,
+    icon: path.join(__dirname, 'assets/icons/png/icon.png')
   });
   // load html file
   mainWindow.loadURL(url.format({
