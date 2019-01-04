@@ -4,6 +4,7 @@ HTML Helper was an app created with the aim of helping people write HTML code(es
 
 ## Installation
 
+* To install the simple way, just go to `releases` and install from there, or you can install using the `node package manager`
 * To install using `npm`, download the `.zip` file and extract the `Html Helper` folder, then run:-
 ```
 npm install
