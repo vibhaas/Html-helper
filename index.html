@@ -70,6 +70,9 @@
 				height: 100%;
 				width: 100%:
 			}
+			.max-height {
+				height: 100%;
+			}
 			.editor {
 					height: 100%;
 					width: 100%;
@@ -79,8 +82,13 @@
 				height: 40%;
 			}
 			.card {
+				overflow-y: auto;
+			}
+			.halfcard {
 				height: 59%;
-		    overflow-y: scroll;
+			}
+			.fullcard {
+				height: 100%;
 			}
 		</style>
     <!-- JavaScript -->
@@ -173,12 +181,12 @@
 				}
 			}
 			function save(){
-				localStorage.html = htmleditor.getValue();
+				/* localStorage.html = htmleditor.getValue();
 				localStorage.css = csseditor.getValue();
 				localStorage.js = jseditor.getValue();
 				localStorage.metadata = metadata.getValue();
 				localStorage.title = $("#title").get(0).value;
-				update();
+				update(); */
 			}
 			function open(){
 				htmleditor.session.setValue(localStorage.html || "<div class=\"container\">\n\t<h1>Hello World!</h1>\n\t<hr>\n\t<p>Welcome to <span onclick=\"message();\">Html Helper</span>!</p>\n</div>");
@@ -207,6 +215,7 @@
 					<ul class="right hide-on-med-and-down">
 						<ul class="tabs tabs-transparent large" style="height:60px">
 							<li class="tab"><a href="#settings"><i class="material-icons">settings</i></a></li>
+							<li class="tab"><a href="#tutorial"><i class="material-icons">book</i></a></li>
 							<li class="tab"><a href="#codearea"><i class="material-icons">code</i></a></li>
 							<li class="tab"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
 						</ul>
@@ -222,9 +231,10 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="tabs">
-							<li class="tab col s4"><a href="#settings"><i class="material-icons">settings</i></a></li>
-							<li class="tab col s4"><a href="#codearea"><i class="material-icons">code</i></a></li>
-							<li class="tab col s4"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
+							<li class="tab col s3"><a href="#settings"><i class="material-icons">settings</i></a></li>
+							<li class="tab col s3"><a href="#tutorial"><i class="material-icons">book</i></a></li>
+							<li class="tab col s3"><a href="#codearea"><i class="material-icons">code</i></a></li>
+							<li class="tab col s3"><a href="#view" class="active"><i class="material-icons">laptop</i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -237,7 +247,7 @@
 				</div>
 				<div class="col s6 pane">
 					<div id="settings" class="col s12 inpane">
-						  <div class="card">
+						  <div class="card halfcard">
 						    <div class="card-content">
 						      <center><h1>SETTINGS</h1></center>
 						    </div>
@@ -387,6 +397,55 @@
 						  </div>
 							<pre class="editor" id="metadata"></pre>
 					</div>
+					<!-- <div id="tutorial" class="col s12 inpane">
+						<div class="card fullcard">
+							<div class="card-tabs">
+								<ul class="tabs tabs-fixed-width">
+									<li class="tab"><a href="#docs">Documentations</a></li>
+									<li class="tab"><a class="active" href="#tuts">Tutorials</a></li>
+								</ul>
+							</div>
+							<div class="card-content">
+								<div id="docs">
+									<div class="card-tabs">
+										<ul class="tabs tabs-fixed-width">
+											<li class="tab"><a class="active" href="#htmldocs">HTML</a></li>
+											<li class="tab"><a href="#cssdocs">CSS</a></li>
+											<li class="tab"><a href="#jsdocs">JS</a></li>
+										</ul>
+									</div>
+									<div class="card-content grey lighten-5" id="htmldocs">
+
+									</div>
+									<div class="card-content grey lighten-5" id="cssdocs">
+
+									</div>
+									<div class="card-content grey lighten-5" id="jsdocs">
+
+									</div>
+								</div>
+								<div id="tuts">
+									<div class="card-tabs">
+										<ul class="tabs tabs-fixed-width">
+											<li class="tab"><a class="active" href="#htmltuts">HTML</a></li>
+											<li class="tab"><a href="#csstuts">CSS</a></li>
+											<li class="tab"><a href="#jstuts">JS</a></li>
+										</ul>
+									</div>
+									<div class="card-content grey lighten-5" id="htmltuts">
+										<iframe src="htmltut.html" width="100%" frameborder="0" class="max-height"></iframe>
+									</div>
+									<div class="card-content grey lighten-5" id="csstuts">
+
+									</div>
+									<div class="card-content grey lighten-5" id="jstuts">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<div id="tutorial" class="col s12 inpane"><iframe src="tutorial.html" class="inpane" width="100%" frameborder="0"></iframe></div>
 					<div id="codearea" class="col s12 inpane"><pre class="editor" id="codedisplay"></pre></div>
 					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0" id="display"></iframe></div>
 				</div>

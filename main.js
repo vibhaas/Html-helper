@@ -1,8 +1,9 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+var fs = require('fs');
 
-const {app, BrowserWindow, Menu, ipcMain} = electron;
+const {app, BrowserWindow, Menu, ipcMain, dialog} = electron;
 
 let mainWindow;
 
@@ -30,11 +31,84 @@ app.on('ready', function(){
   Menu.setApplicationMenu(mainMenu);
 });
 
+function open(filePath) {
+  fs.readFile(filePath, 'utf-8', (err, data) => {
+     if(err){
+         console.log("An error ocurred reading the file :" + err.message);
+         return;
+     }
+
+     // Change how to handle the file content
+     console.log("The file content is : " + data);
+  });
+}
+
+function save(fileName) {
+  var content = ""; // Get this somehow [selectedTab.getContent()]
+  fs.writeFile(fileName, content, (err) => {
+      if(err){
+          console.log("An error ocurred creating the file "+ err.message);
+      }
+
+      console.log("The file has been succesfully saved");
+  });
+}
+
 // Create menu template
 const mainMenuTemplate = [
   {
     label: 'File',
     submenu: [
+      {
+        label: 'New',
+        accelerator: 'CmdOrCtrl+N',
+        click(){
+          console.log('Feature unavailable in this version.');
+        }
+      },
+      {
+        label: 'Open',
+        accelerator: 'CmdOrCtrl+O',
+        click(){
+          dialog.showOpenDialog({
+              title: "Select a file",
+              properties: ["openFile", 'multiSelections']
+          }, (filePaths) => {
+              if(filePaths === undefined){
+                  console.log("No file selected!");
+                  return;
+              }
+              else {
+                console.log(filePaths);
+                var i = 0;
+                for(i = 0; i < filePaths.length; i++) {
+                  open(filePaths[i]);
+                }
+              }
+          });
+        }
+      },
+      {
+        label: 'Save',
+        accelerator: 'CmdOrCtrl+S',
+        click(){
+          dialog.showSaveDialog((fileName) => {
+              if (fileName === undefined){
+                  console.log("An error occured");
+                  return;
+              }
+              // Access the save() function
+
+          });
+        }
+      },
+      {
+        label: 'Save as',
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click(){
+          console.log('Feature unavailable in this version.');
+        }
+      },
       {
         label: 'Quit',
         accelerator: 'CmdOrCtrl+Q',
@@ -52,6 +126,13 @@ const mainMenuTemplate = [
         accelerator: 'CmdOrCtrl+I',
         click(item, focusedWindow){
           focusedWindow.toggleDevTools();
+        }
+      },
+      {
+        label: 'Exam Mode',
+        accelerator: 'CmdOrCtrl+Shift+E',
+        click() {
+          console.log('Feature unavailable in this version.');
         }
       },
       {
