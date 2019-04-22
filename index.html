@@ -99,6 +99,9 @@
 		<script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
 		<script>if (window.module) module = window.module;</script>
 		<script>
+			const electron = require("electron");
+			const {ipcRenderer} = electron;
+
 			function write(iframe, content)	{
 				iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
 				iframe.document.open();
@@ -181,22 +184,49 @@
 				}
 			}
 			function save(){
-				/* localStorage.html = htmleditor.getValue();
-				localStorage.css = csseditor.getValue();
-				localStorage.js = jseditor.getValue();
-				localStorage.metadata = metadata.getValue();
-				localStorage.title = $("#title").get(0).value;
-				update(); */
+				ipcRenderer.send("file:save", "<!DOCTYPE html>\n<html>\n<head>\n<title>"+$("#title").get(0).value+"</title>\n<style>\n"+csseditor.getValue()+"\n</style>\n<script>\n"+jseditor.getValue()+"\n</"+"script>\n"+metadata.getValue()+"\n</head>\n<body>\n"+htmleditor.getValue()+"\n</body>\n</html>");
+				update();
 			}
-			function open(){
-				htmleditor.session.setValue(localStorage.html || "<div class=\"container\">\n\t<h1>Hello World!</h1>\n\t<hr>\n\t<p>Welcome to <span onclick=\"message();\">Html Helper</span>!</p>\n</div>");
-				csseditor.session.setValue(localStorage.css || "h1 {\n\tcolor: red;\n}\nspan:hover {\n\tcolor: red;\n}");
-				jseditor.session.setValue(localStorage.js || "function message(){\n\talert('Html Helper was created by Vibhaas!');\n}");
-				metadata.session.setValue(localStorage.metadata || "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");
+			function open(content){
+				// Parse the code
+				var page = new Document();
+				page.innerHTML = content;
+				var styleObject = document.getElementsByTagName("STYLE");
+				var styles = "";
+				for (var i = 0; i < styleObject.length; i++) {
+					 styles = styles + styleObject[i].innerHTML + "\n";
+				 }
+				 console.log(styles);
+				 var scriptObject = document.getElementsByTagName("SCRIPT");
+				 var scripts = "";
+				 for (var i = 0; i < scriptObject.length; i++) {
+						scripts = scripts + scriptObject[i].innerHTML + "\n";
+						if (scriptObject[i].innerHTML == "" || scriptObject[i].innerHTML == " ") {
+							$(page).find('script')[i].remove();
+						}
+				 }
+				 $(page).find('style').remove();
+				 var head = page.getElementsByTagName("HEAD")[0].innerHTML;
+				 $(page).find('head').remove();
+				 var body = page.getElementsByTagName("BODY")[0].innerHTML;
+				 $(page).find('body').remove();
+				 body = body + page.getElementsByTagName("HTML")[0].innerHTML;
+				// Set values
+				htmleditor.session.setValue(body);
+				csseditor.session.setValue(styles);
+				jseditor.session.setValue(scripts);
+				metadata.session.setValue(head);
+				uodate();
 			}
 			$(document).ready(function(){
 				$('.sidenav').sidenav();
 				$('.tabs').tabs();
+			});
+			ipcRenderer.on('file:goSave', function(event, item) {
+			  save();
+			});
+			ipcRenderer.on('file:open', function(event, item) {
+			  open(item);
 			});
 		</script>
 	</head>
@@ -397,54 +427,6 @@
 						  </div>
 							<pre class="editor" id="metadata"></pre>
 					</div>
-					<!-- <div id="tutorial" class="col s12 inpane">
-						<div class="card fullcard">
-							<div class="card-tabs">
-								<ul class="tabs tabs-fixed-width">
-									<li class="tab"><a href="#docs">Documentations</a></li>
-									<li class="tab"><a class="active" href="#tuts">Tutorials</a></li>
-								</ul>
-							</div>
-							<div class="card-content">
-								<div id="docs">
-									<div class="card-tabs">
-										<ul class="tabs tabs-fixed-width">
-											<li class="tab"><a class="active" href="#htmldocs">HTML</a></li>
-											<li class="tab"><a href="#cssdocs">CSS</a></li>
-											<li class="tab"><a href="#jsdocs">JS</a></li>
-										</ul>
-									</div>
-									<div class="card-content grey lighten-5" id="htmldocs">
-
-									</div>
-									<div class="card-content grey lighten-5" id="cssdocs">
-
-									</div>
-									<div class="card-content grey lighten-5" id="jsdocs">
-
-									</div>
-								</div>
-								<div id="tuts">
-									<div class="card-tabs">
-										<ul class="tabs tabs-fixed-width">
-											<li class="tab"><a class="active" href="#htmltuts">HTML</a></li>
-											<li class="tab"><a href="#csstuts">CSS</a></li>
-											<li class="tab"><a href="#jstuts">JS</a></li>
-										</ul>
-									</div>
-									<div class="card-content grey lighten-5" id="htmltuts">
-										<iframe src="htmltut.html" width="100%" frameborder="0" class="max-height"></iframe>
-									</div>
-									<div class="card-content grey lighten-5" id="csstuts">
-
-									</div>
-									<div class="card-content grey lighten-5" id="jstuts">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
 					<div id="tutorial" class="col s12 inpane"><iframe src="tutorial.html" class="inpane" width="100%" frameborder="0"></iframe></div>
 					<div id="codearea" class="col s12 inpane"><pre class="editor" id="codedisplay"></pre></div>
 					<div id="view" class="col s12 inpane"><iframe src="about:blank" class="inpane" width="100%" frameborder="0" id="display"></iframe></div>
@@ -524,7 +506,6 @@
 							enableSnippets: true,
 							enableLiveAutocompletion: true
 					});
-					open();
 					update();
 					esetload();
 					htmleditor.session.on('change', function(delta) {
