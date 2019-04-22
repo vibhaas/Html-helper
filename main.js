@@ -26,7 +26,23 @@ app.on('ready', function(){
   }));
   // Quit app when closed
   mainWindow.on('closed', function (){
-    app.quit();
+    if (changed == true) {
+      dialog.showMessageBox({type:"question", buttons:["Cancel", "Save and Quit", "Ignore and Quit"], title:"Unsaved file", message:"You did not save the file"}, function(response) {
+        if (response == 0) {
+          return;
+        }
+        else if (response == 1) {
+          goSave();
+          app.quit();
+        }
+        else {
+          app.quit();
+        }
+      });
+    }
+    else {
+      app.quit();
+    }
   });
   // Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
