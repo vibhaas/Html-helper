@@ -110,6 +110,7 @@
 			}
 			function update()	{
 				var page = "<!DOCTYPE html>\n<html>\n<head>\n<title>"+$("#title").get(0).value+"</title>\n<style>\n"+csseditor.getValue()+"\n</style>\n<script>\n"+jseditor.getValue()+"\n</"+"script>\n"+metadata.getValue()+"\n</head>\n<body>\n"+htmleditor.getValue()+"\n</body>\n</html>";
+				ipcRenderer.send("file:changed", true);
 				write($('#display').get(0), page);
 				codedisplay.setValue(page);
 			}
@@ -185,38 +186,37 @@
 			}
 			function save(){
 				ipcRenderer.send("file:save", "<!DOCTYPE html>\n<html>\n<head>\n<title>"+$("#title").get(0).value+"</title>\n<style>\n"+csseditor.getValue()+"\n</style>\n<script>\n"+jseditor.getValue()+"\n</"+"script>\n"+metadata.getValue()+"\n</head>\n<body>\n"+htmleditor.getValue()+"\n</body>\n</html>");
-				update();
 			}
 			function open(content){
 				// Parse the code
-				var page = new Document();
+				page = document.createElement( 'html' );
 				page.innerHTML = content;
-				var styleObject = document.getElementsByTagName("STYLE");
+				var styleObject = page.getElementsByTagName("STYLE");
 				var styles = "";
 				for (var i = 0; i < styleObject.length; i++) {
-					 styles = styles + styleObject[i].innerHTML + "\n";
+					 styles = styles + styleObject[i].innerHTML;
 				 }
-				 console.log(styles);
-				 var scriptObject = document.getElementsByTagName("SCRIPT");
+				 var scriptObject = page.getElementsByTagName("SCRIPT");
 				 var scripts = "";
 				 for (var i = 0; i < scriptObject.length; i++) {
-						scripts = scripts + scriptObject[i].innerHTML + "\n";
-						if (scriptObject[i].innerHTML == "" || scriptObject[i].innerHTML == " ") {
+						scripts = scripts + scriptObject[i].innerHTML;
+						if (scriptObject[i].innerHTML != "" || scriptObject[i].innerHTML != " ") {
 							$(page).find('script')[i].remove();
 						}
 				 }
 				 $(page).find('style').remove();
+				 var title = page.getElementsByTagName("TITLE")[0].innerHTML;
+				 $(page).find('title').remove();
 				 var head = page.getElementsByTagName("HEAD")[0].innerHTML;
-				 $(page).find('head').remove();
 				 var body = page.getElementsByTagName("BODY")[0].innerHTML;
-				 $(page).find('body').remove();
-				 body = body + page.getElementsByTagName("HTML")[0].innerHTML;
 				// Set values
 				htmleditor.session.setValue(body);
 				csseditor.session.setValue(styles);
 				jseditor.session.setValue(scripts);
 				metadata.session.setValue(head);
-				uodate();
+				$("#title").get(0).value = title;
+				console.log(title + head + styles + scripts + body);
+				update();
 			}
 			$(document).ready(function(){
 				$('.sidenav').sidenav();
@@ -507,6 +507,7 @@
 							enableLiveAutocompletion: true
 					});
 					update();
+					ipcRenderer.send("file:changed", false);
 					esetload();
 					htmleditor.session.on('change', function(delta) {
     				update();

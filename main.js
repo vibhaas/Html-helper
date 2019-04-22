@@ -8,7 +8,7 @@ const {app, BrowserWindow, Menu, ipcMain, dialog} = electron;
 let mainWindow;
 
 var openedFile = undefined;
-var changed = true;
+var changed = false;
 
 // listen for app to be ready
 app.on('ready', function(){
@@ -28,20 +28,21 @@ app.on('ready', function(){
   mainWindow.on('closed', function (){
     app.quit();
   });
-  // Save function
-  function goSave() {
-    mainWindow.webContents.send('file:goSave', 'gosave');
-  }
   // Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert menu
   Menu.setApplicationMenu(mainMenu);
 });
 
+// goSave function
+function goSave() {
+  mainWindow.webContents.send('file:goSave', 'gosave');
+}
+
 function open(filePath) {
   fs.readFile(filePath, 'utf-8', (err, data) => {
      if(err){
-         console.log("An error ocurred reading the file :" + err.message);
+         dialog.showErrorBox("Unable to read file", "An error ocurred reading the file :" + err.message);
          return;
      }
      // Check file type
@@ -52,7 +53,7 @@ function open(filePath) {
        changed = false;
     }
     else {
-      console.log("File is not HTMl!");
+      dialog.showErrorBox("Incorrect filetype", "File is not HTMl!");
       return;
     }
   });
@@ -61,11 +62,10 @@ function open(filePath) {
 function save(fileName, content) {
   fs.writeFile(fileName, content, (err) => {
       if(err){
-          console.log("An error ocurred creating the file "+ err.message);
+          dialog.showErrorBox("Unable to save file", "An error ocurred creating the file "+ err.message);
       }
       openedFile = fileName;
       changed = false;
-      console.log("The file has been succesfully saved");
   });
 }
 
@@ -80,7 +80,7 @@ ipcMain.on('file:save', function(event, item) {
 // Catch Change (file:changed)
 
 ipcMain.on('file:changed', function(event, item) {
-  changed = item; // item will always be true here
+  changed = item;
 });
 
 // Create menu template
@@ -92,29 +92,72 @@ const mainMenuTemplate = [
         label: 'New',
         accelerator: 'CmdOrCtrl+N',
         click(){
-          console.log('Feature unavailable in this version.');
+          dialog.showMessageBox({type:"info", buttons:["OK"], title:"Feature unavailable", message:"Feature unavailable in this version."});
         }
       },
       {
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
         click(){
-          dialog.showOpenDialog({
-              title: "Select a file",
-              properties: ["openFile", 'multiSelections']
-          }, (filePaths) => {
-              if(filePaths === undefined){
-                  console.log("No file selected!");
-                  return;
+          if (changed == true) {
+            dialog.showMessageBox({type:"question", buttons:["Cancel", "Save and Continue", "Ignore and Continue"], title:"Unsaved file", message:"You did not save the file"}, function(response) {
+              if (response == 0) {
+                return;
+              }
+              else if (response == 1) {
+                goSave();
+                dialog.showOpenDialog({
+                    title: "Select a file",
+                    properties: ["openFile", 'multiSelections']
+                }, (filePaths) => {
+                    if(filePaths === undefined){
+                        dialog.showErrorBox("No file selected!", "No file selected! Please select a file!");
+                        return;
+                    }
+                    else {
+                      var i = 0;
+                      for(i = 0; i < filePaths.length; i++) {
+                        open(filePaths[i]);
+                      }
+                    }
+                });
               }
               else {
-                console.log(filePaths);
-                var i = 0;
-                for(i = 0; i < filePaths.length; i++) {
-                  open(filePaths[i]);
-                }
+                dialog.showOpenDialog({
+                    title: "Select a file",
+                    properties: ["openFile", 'multiSelections']
+                }, (filePaths) => {
+                    if(filePaths === undefined){
+                        dialog.showErrorBox("No file selected!", "No file selected! Please select a file!");
+                        return;
+                    }
+                    else {
+                      var i = 0;
+                      for(i = 0; i < filePaths.length; i++) {
+                        open(filePaths[i]);
+                      }
+                    }
+                });
               }
-          });
+            });
+          }
+          else {
+            dialog.showOpenDialog({
+                title: "Select a file",
+                properties: ["openFile", 'multiSelections']
+            }, (filePaths) => {
+                if(filePaths === undefined){
+                    dialog.showErrorBox("No file selected!", "No file selected! Please select a file!");
+                    return;
+                }
+                else {
+                  var i = 0;
+                  for(i = 0; i < filePaths.length; i++) {
+                    open(filePaths[i]);
+                  }
+                }
+            });
+          }
         }
       },
       {
@@ -124,7 +167,7 @@ const mainMenuTemplate = [
           if (openedFile == undefined) {
             dialog.showSaveDialog((fileName) => {
                 if (fileName === undefined){
-                    console.log("An error occured");
+                    dialog.showErrorBox("An error occured", "Unable to save file");
                     return;
                 }
                 openedFile = fileName;
@@ -140,26 +183,37 @@ const mainMenuTemplate = [
         label: 'Save as',
         accelerator: 'CmdOrCtrl+Shift+S',
         click(){
-          if (changed == true) {
-            // Unsaved handler
-          }
-          else {
-            dialog.showSaveDialog((fileName) => {
-                if (fileName === undefined){
-                    console.log("An error occured");
-                    return;
-                }
-                openedFile = fileName;
-                goSave();
-            });
-          }
+          dialog.showSaveDialog((fileName) => {
+            if (fileName === undefined){
+              dialog.showErrorBox("An error occured", "Unable to save file");
+              return;
+            }
+            openedFile = fileName;
+            goSave();
+          });
         }
       },
       {
         label: 'Quit',
         accelerator: 'CmdOrCtrl+Q',
         click(){
-          app.quit();
+          if (changed == true) {
+            dialog.showMessageBox({type:"question", buttons:["Cancel", "Save and Quit", "Ignore and Quit"], title:"Unsaved file", message:"You did not save the file"}, function(response) {
+              if (response == 0) {
+                return;
+              }
+              else if (response == 1) {
+                goSave();
+                app.quit();
+              }
+              else {
+                app.quit();
+              }
+            });
+          }
+          else {
+            app.quit();
+          }
         }
       }
     ]
@@ -178,7 +232,7 @@ const mainMenuTemplate = [
         label: 'Exam Mode',
         accelerator: 'CmdOrCtrl+Shift+E',
         click() {
-          console.log('Feature unavailable in this version.');
+          dialog.showMessageBox({type:"info", buttons:["OK"], title:"Feature unavailable", message:"Feature unavailable in this version."});
         }
       },
       {
