@@ -105,13 +105,6 @@ const mainMenuTemplate = [
     label: 'File',
     submenu: [
       {
-        label: 'New',
-        accelerator: 'CmdOrCtrl+N',
-        click(){
-          dialog.showMessageBox({type:"info", buttons:["OK"], title:"Feature unavailable", message:"Feature unavailable in this version."});
-        }
-      },
-      {
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
         click(){
