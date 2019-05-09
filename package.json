@@ -1,6 +1,6 @@
 {
   "name": "html-helper",
-  "version": "2.6.0",
+  "version": "2.4.0",
   "description": "HTML Helper is a simple but powerful code editor created with the aim of helping people write HTML code(especially in my school)",
   "main": "main.js",
   "scripts": {
