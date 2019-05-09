@@ -1,66 +1,21 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-<!--
 <head>
 <meta charset="UTF-8">
-<title>HTML/JavaScript Tutorial</title>
-<style>
-  html,body{
-  min-width:290px;
-    color: #4d4e53;
-    background-color: #ffffff;
-    font-family: 'Open Sans',Arial,sans-serif;
-    line-height: 1.5;
-}
-#navbar{
-  position:fixed;
-  min-width:290px;
-  top:0px;
-  left:0px;
-  width:300px;
-  height:100%;
-  border-right:solid;
-  border-color:rgba(0,22,22,0.4)
-}
-header{
-  color:black;
-  font-size: 30px;
-  margin:10px;
-  text-align:center;
-  font-size:1.8em;
-  font-weight:thin;
-}
-#main-doc header{
-  text-align:left;
-  margin:0px;
-}
-#navbar ul{
-  height:88%;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
-#navbar li{
-  color: #4d4e53;
-  border:1px solid;
-  border-bottom-width:0px;
-  padding:8px;
-  padding-left:45px;
-  list-style: none;
-  position:relative;
- left:-50px;
-  width:100%;
+<title>CodePen - Web Dev Docs</title>
 
-}
-#navbar a{
-  color: #4d4e53;
-    text-decoration:none;
-    cursor:pointer;
-}
-#main-doc{
-  position: absolute;
-  margin-left:310px;
-  padding:20px;
-  margin-bottom:110px;
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+
+<script src="assets/js/bootstrap.min.js"></script>
+<link rel='stylesheet' href='assets/css/font-awesome.min.css'>
+<style>
+      .table {
+  width: 95%;
+  margin: auto;
 }
 section article{
   color: #4d4e53;
@@ -70,90 +25,1773 @@ section article{
 section li {
   margin:15px 0px 0px 20px;
 }
+#main-doc header{
+  color:black;
+  font-size: 30px;
+  font-size:1.8em;
+  font-weight:thin;
+  text-align:left;
+  margin:0px;
+}
 code{
   display:block;
-    text-align: left;
+  text-align: left;
   white-space: pre;
   position: relative;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 2;
-    background-color:#f7f7f7;
+  word-wrap: normal;
+  line-height: 2;
+  background-color:#f7f7f7;
   padding:15px;
   margin:10px;
-    border-radius:5px;
-}
-@media only screen and (max-width: 815px) {
-    /* For mobile phones: */
-  #navbar ul{
-  border:1px solid;
-    height:207px;
-  }
-    #navbar{
-      background-color:white;
-      position:absolute;
-      top:0;
-      padding:0;
-      margin: 0;
-      width:100%;
-      max-height:275px;
-      border:none;
-      z-index:1;
-      border-bottom:2px solid;
-    }
-  #main-doc{
-    position: relative;
-    margin-left:0px;
-    margin-top:270px;
-  }
-  #main-doc section {
-/*     padding-top: 240px; */
-  }
-}
-@media only screen and (max-width: 400px) {
-  #main-doc{
-    margin-left:-10px;
-  }
-  code{
-    margin-left:-20px;
-    width:100%;
-    padding:15px;
-    padding-left:10px;
-    padding-right:45px;
-    min-width:233px;
-  }
+  border-radius:5px;
+  overflow-x: auto;
 }
     </style>
 </head>
 <body translate="no">
-<nav id="navbar">
-<header>JS Documentation</header>
-<ul>
-<a class="nav-link" href="#Introduction" rel="internal"><li>Introduction</li></a>
-<a class="nav-link" href="#What_you_should_already_know" rel="internal"><li>What you should already know</li></a>
-<a class="nav-link" href="#JavaScript_and_Java" rel="internal"><li>JavaScript and Java</li></a>
-<a class="nav-link" href="#Hello_world" rel="internal"><li>Hello world</li></a>
-<a class="nav-link" href="#Variables" rel="internal"><li>Variables</li></a>
-<a class="nav-link" href="#Declaring_variables" rel="internal"><li>Declaring variables</li></a>
-<a class="nav-link" href="#Variable_scope" rel="internal"><li>Variable scope</li></a>
-<a class="nav-link" href="#Global_variables" rel="internal"><li>Global variables</li></a>
-<a class="nav-link" href="#Constants" rel="internal"><li>Constants</li></a>
-<a class="nav-link" href="#Data_types" rel="internal"><li>Data types</li></a>
-<a class="nav-link" href="#if...else_statement" rel="internal"><li>if...else statement</li></a>
-<a class="nav-link" href="#while_statement" rel="internal"><li>while statement</li></a>
-<a class="nav-link" href="#Function_declarations" rel="internal"><li>Function declarations</li></a>
-<a class="nav-link" href="#Reference" rel="internal"><li>Reference</li></a>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1>Web Dev Docs</h1>
+<p>HTML and CSS references from w3schools and JavaScript documenation from MDN. The Basic Web Dev Docs tutorial is based on FreeCodeCamp.</p>
+<p>Web Dev Docs created for <a target="_blank" href="https://github.com/vibhaas/Html-helper/">Html Helper</a>.</p>
+</div>
+</div>
+<div class="container">
+<ul class="nav nav-tabs nav-justified" role="tablist">
+<li class="nav-item"><a class="nav-link active" role="tab" aria-controls="general" aria-selected="true" data-toggle="tab" href="#general">Basics</a></li>
+<li class="nav-item"><a class="nav-link" role="tab" aria-controls="htmlref" aria-selected="false" data-toggle="tab" href="#htmlref">HTML</a></li>
+<li class="nav-item"><a class="nav-link" role="tab" aria-controls="cssref" aria-selected="false" data-toggle="tab" href="#cssref">CSS</a></li>
+<li class="nav-item"><a class="nav-link" role="tab" aria-controls="jsref" aria-selected="false" data-toggle="tab" href="#jsref">JS</a></li>
 </ul>
-</nav>
+<div class="tab-content">
+<div class="tab-pane fade show active" id="general">
+<br>
+<h1>Basic HTML</h1>
+<p>Welcome! You are in the Code Cauldron's basic web development tutorial! These will walk you through web development step-by-step.</p>
+<p>HTML, or HyperText Markup Language, is a markup language used to describe the structure of a web page. It uses a special syntax or notation to organize and give information about the page to the browser. Elements usually have opening and closing tags that surround and give meaning to content. For example, there are different tag options to place around text to show whether it is a heading, a paragraph, or a list. For example:</p>
+<code>&lt;h1&gt;Top level heading: Maybe a page title&lt;/h1&gt;
+&lt;p&gt;A paragraph of text. Some information we would like to communicate to the viewer. This can be as long or short as we would like.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Number one on the list&lt;/li&gt;
+&lt;li&gt;Number two&lt;/li&gt;
+&lt;li&gt;A third item&lt;/li&gt;
+&lt;/ol&gt;</code>
+<p>Becomes:</p>
+<h1>Top level heading: Maybe a page title</h1>
+<p>A paragraph of text. Some information we would like to communicate to the viewer. This can be as long or short as we would like.</p>
+<ol>
+<li>Number one on the list</li>
+<li>Number two</li>
+<li>A third item</li>
+</ol>
+<h3>HTML Elements</h3>
+<p>To start off, empty all the code in the editors, and then type the following:</p>
+<code>&lt;h1&gt;Hello, World!&lt;/h1&gt;</code>
+<p>You can see the output in the display area - That's an HTML element. Most HTML elements have opening tags and closing tags.</p>
+<p>Opening tags look like this:</p>
+<code>&lt;h1&gt;</code>
+<p>And closing tags look like this:</p>
+<code>&lt;/h1&gt;</code>
+<p>The only difference between opening and closing tags is the forward slash after the opening bracket of a closing tag. In most places, HTML Elements will be be referred to as <i>tags</i>.</p>
+<h3>The Header Tag</h3>
+<p>Try out the following code:</p>
+<code>&lt;h1&gt;Header One&lt;/h1&gt;
+&lt;h2&gt;Header Two&lt;/h2&gt;
+&lt;h3&gt;Header Three&lt;/h3&gt;
+&lt;h4&gt;Header Four&lt;/h4&gt;
+&lt;h5&gt;Header Five&lt;/h5&gt;
+&lt;h6&gt;Header Six&lt;/h6&gt;</code>
+<p>This tag tells the browser about the structure of your website. h1 elements are often used for main headings, while h2 elements are generally used for subheadings. There are also h3, h4, h5 and h6 elements to indicate different levels of subheadings.</p>
+<h3>The Paragraph Tag</h3>
+<p>p elements are the preferred element for paragraph text on websites. p is short for "paragraph".</p>
+<p>You can create a paragraph element like this:</p>
+<code>&lt;p&gt;I'm a p tag!&lt;/p&gt;</code>
+<h3>Commenting</h3>
+<p>Commenting is a way that you can leave comments for other developers within your code without affecting the resulting output that is displayed to the end user.</p>
+<p>Commenting is also a convenient way to make code inactive without having to delete it entirely.Comments in HTML starts with <i>&lt;!--</i> and ends with a <i>--&gt;</i></p>
+<p>For example:</p>
+<code>&lt;!-- I am a comment --&gt;</code>
+<h3>Images</h3>
+<p>You can add images to your website by using the img element, and point to a specific image's URL using the src attribute. An example of this would be:</p>
+<code>&lt;img src="https://www.your-image-source.com/your-image.jpg"&gt;</code>
+<p>Note that img elements are self-closing, i.e., they do not require a closing tag.</p>
+<p>All img elements must have an alt attribute. The text inside an alt attribute is used for screen readers to improve accessibility and is displayed if the image fails to load.<br><br>Note: If the image is purely decorative, using an empty alt attribute is a best practice.<br><br>Ideally the alt attribute should not contain special characters unless needed.<br><br>Let's add an alt attribute to our img example above:</p>
+<code>&lt;img src="https://www.your-image-source.com/your-image.jpg" alt="Author standing on a beach with two thumbs up."&gt;</code>
+<h3>Linking</h3>
+<b><i>NOTE: In case you have any difficulties using links in the Code Cauldron, feel free to save your file and open it in a normal browser</i></b>
+<p>You can use <i>anchor</i> elements to link to content outside of your web page.</p>
+<p><i>anchor</i> elements need a destination web address called an <i>href</i> attribute. They also need anchor text. Here's an example:</p>
+<code>&lt;a href="https://vibhaas.github.io"&gt;this links to vibhaas.github.io&lt;/a&gt;</code>
+<p>Then your browser will display the text "this links to vibhaas.github.io" as a link you can click. And that link will take you to the web address https://vibhaas.github.io.</p>
+<p>To make your link open in a new tab use this: </p>
+<code>&lt;a target="_blank" href="https://vibhaas.github.io"&gt;this links to vibhaas.github.io&lt;/a&gt;</code>
+<p>You can also link to internal parts of the page, for example:</p>
+<code>&lt;a href="#contacts-header"&gt;Contacts&lt;/a&gt;
+...
+&lt;h2 id="contacts-header"&gt;Contacts&lt;/h2&gt;</code>
+<p>This link will take you to part of the page with the id of "contacts-header". Try the example given below to get a grasp of how it works</p>
+<code style="height:200px;overflow-y:scroll;">&lt;h2&gt;CatPhotoApp&lt;/h2&gt;
+&lt;a href="#footer"&gt;Go to bottom&lt;/a&gt;
+&lt;img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."&gt;
+&lt;p&gt;Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.&lt;/p&gt;
+&lt;p&gt;Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.&lt;/p&gt;
+&lt;p&gt;Meowwww loved it, hated it, loved it, hated it yet spill litter box, scratch at owner, destroy all furniture, especially couch or lay on arms while you're using the keyboard. Missing until dinner time toy mouse squeak roll over. With tail in the air lounge in doorway. Man running from cops stops to pet cats, goes to jail.&lt;/p&gt;
+&lt;p&gt;Intently stare at the same spot poop in the plant pot but kitten is playing with dead mouse. Get video posted to internet for chasing red dot leave fur on owners clothes meow to be let out and mesmerizing birds leave fur on owners clothes or favor packaging over toy so purr for no reason. Meow to be let out play time intently sniff hand run outside as soon as door open yet destroy couch.&lt;/p&gt;
+&lt;h5 id="footer"&gt;Copyright Cat Photo App&lt;/h3&gt</code>
+<p>You can nest most elements, including <i>anchor</i>. Nesting refers to placing a tag within another like so:</p>
+<code>&lt;p&gt;this links to &lt;a target="_blank" href="https://vibhaas.github.io"&gt;vibhaas.github.io&lt;/a&gt;&lt;/p&gt;</code>
+<p>Sometimes you want to add <i>a</i> elements to your website before you know where they will link. This is also handy when you're changing the behavior of a link using <i>JavaScript</i>, which we'll learn about later. We can do this by using the href attribute, and using it like this:</p>
+<code>&lt;a href="#"&gt;empty link!&lt;/a&gt;</code>
+<p>You can make elements into links by nesting them within an a element. Lets nest an image within an <i>a</i> element. Here's an example:</p>
+<code>&lt;a target="_blank" href="https://google.com"&gt;&lt;img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."&gt;&lt;/a&gt;</code>
+<h3>Lists</h3>
+<p>HTML has special tags for formatting lists, which are of two types: Unordered Lists (ul) and Ordered Lists (ol). Each list has List Items (li) in them :-</p>
+<code>&lt;ul&gt;
+&lt;li&gt;milk&lt;/li&gt;
+&lt;li&gt;cheese&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;milk&lt;/li&gt;
+&lt;li&gt;cheese&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol type="a"&gt;
+&lt;li&gt;milk&lt;/li&gt;
+&lt;li&gt;cheese&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start="5"&gt;
+&lt;li&gt;milk&lt;/li&gt;
+&lt;li&gt;cheese&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol type="A" start="10"&gt;
+&lt;li&gt;milk&lt;/li&gt;
+&lt;li&gt;cheese&lt;/li&gt;
+&lt;/ol&gt;</code>
+<p>Try them out!</p>
+<h3>Break Line</h3>
+<p>In HTML, simply pressing enter does not start a newline, we have to use the <i>br</i> tag</p>
+<code>LINE 1
+LINE 2
+LINE 3
+&lt;br&gt;&lt;br&gt;
+LINE 1&lt;br&gt;
+LINE 2&lt;br&gt;
+LINE 3&lt;br&gt;</code>
+<h3>Forms</h3>
+<p>Now that you have come this far, it's time for a little challenge. You will have to figure out what the following code does using the comments (a comment-reading lesson) - Copy it to the Cauldron and check it out:</p>
+<code style="height:200px;overflow-y:scroll;">&lt;form submit="example.php"&gt; &lt;!-- Submit is the page the form submits to (its usually a .php or a .asp link) - don't worry about it! --&gt;
+&lt;!-- Text Inputs --&gt;
+&lt;input type="text" name="input1" id="input1"&gt;&lt;br&gt; &lt;!-- Most Inputs need not be in a form --&gt;
+&lt;input type="text" name="input2" id="input2" value="Search"&gt;&lt;br&gt;
+&lt;input type="text" name="input3" id="input3" placeholder="Search"&gt;&lt;br&gt;
+&lt;input type="text" name="input4" id="input4" placeholder="Search" value="Search"&gt;&lt;br&gt;
+&lt;input type="text" name="input5" id="input5" disabled&gt;&lt;br&gt;
+&lt;input type="text" name="input6" id="input6" value="Search" disabled&gt;&lt;br&gt;
+&lt;input type="text" name="input7" id="input7" placeholder="Search" required&gt;&lt;br&gt; &lt;!-- Form won't submit without you filling up this field --&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;!-- Radio buttons and Checkboxes --&gt;
+&lt;label for="indoor"&gt;
+&lt;input id="indoor" type="radio" name="indoor-outdoor"&gt;Indoor
+&lt;/label&gt;
+&lt;label for="outdoor"&gt;
+&lt;input id="outdoor" type="radio" name="indoor-outdoor"&gt;Outdoor
+&lt;/label&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;label for="male"&gt;
+&lt;input id="male" type="radio" name="male-female"&gt;Male
+&lt;/label&gt;
+&lt;label for="female"&gt;
+&lt;input id="female" type="radio" name="male-female" checked&gt;Female &lt;!-- Select by default --&gt;
+&lt;/label&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox"&gt; One&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox" checked&gt; Two&lt;/label&gt; &lt;!-- Checked by default --&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox"&gt; Three&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox" checked&gt; Four&lt;/label&gt; &lt;!-- Checked by default --&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox" disabled&gt; Five&lt;/label&gt; &lt;!-- Disabled --&gt;
+&lt;label&gt;&lt;input type="checkbox" name="cbox" checked disabled&gt; Six&lt;/label&gt; &lt;!-- Disabled and checked --&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;!-- Buttons --&gt;
+&lt;button&gt;Button&lt;/button&gt; &lt;!-- Buttons also need not be in a form --&gt;&lt;br&gt;
+&lt;button onClick="alert('Hello!');"&gt;Button&lt;/button&gt;&lt;br&gt; &lt;!-- Button using JavaScript onClick (more on this later) --&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;!-- Sumbit Input (this input is always with a form - this will submit the forms values to example.php) --&gt;
+&lt;input type="submit"&gt;
+&lt;/form&gt;</code>
+<h3>The Div Tag and Span Tag</h3>
+<p>The division (<i>div</i>) element defines a section in the document - It is mainly used for code readability purposes and is a particular favourite for applying <i>CSS</i></p>
+<code>&lt;div&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;p&gt; ... &lt;/p&gt;
+&lt;/div&gt;</code>
+<p>Another favourite of <i>CSS</i> styles is the <i>span</i> tag, which does pretty much the same thing, except it is traditionaly used inside the <i>p</i> tag.</p>
+<code>&lt;p&gt; ... &lt;span&gt; .... &lt;/span&gt; ... &lt;/p&gt;</code>
+<h3>Wrapping Up</h3>
+<p>Okay, so now your knowledge of HTML (Hypertext Markup Language) is almost complete, lets wrap up by covering ordinary HTML document structure!</p>
+<p>In most editors, you will be required to define your <i>html</i>, <i>head</i>, <i>title</i> and <i>body</i> tags, in fact, if you head over to the Html Helper Editor instead of the Cauldron, your document won't be taken care of by itself!</p>
+<p><b><i>NOTE: Open in a regular browser to see the title of your page!</i></b></p>
+<p>Here is a basic document:</p>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Page Title&lt;/title&gt; &lt;!-- Title of your page --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+My Page Body &lt;!-- Everything you would type in the HTML tab of the cauldron, basically everything you want to display --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+<img class="img-fluid img-thumbnail mx-auto d-block" src="assets/images/browser.png" alt="Image of a Browser Window">
+<p>Here is a document with script (For JavaScript) and styles (For CSS):</p>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Page Title&lt;/title&gt;
+&lt;!-- Add JavaScript --&gt;
+&lt;script&gt;
+alert('Hello!');
+&lt;/script&gt;
+&lt;!-- Add CSS --&gt;
+&lt;style&gt;
+body {
+color:green;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+My Page Body
+&lt;/body&gt;
+&lt;/html&gt;</code>
+<p>By the way, if you were wondering, the <i>&lt;!DOCTYPE html&gt;</i> lets the browser know that the document is an HTML page and is an essential part of a web page.</p>
+<p>If you have made it this far, then congratulations! You can now start learning CSS. HTML has a huge amount of tags, which you can see in the HTML reference in the next tab!</p>
+<h1>Basic CSS</h1>
+<p>Cascading Style Sheets (CSS) tell the browser how to display the text and other content that you write in HTML.</p>
+<p>Note that CSS is case-sensitive so be careful with your capitalization. CSS has been adopted by all major browsers and allows you to control:</p>
+<ul>
+<li>color</li>
+<li>fonts</li>
+<li>positioning</li>
+<li>spacing</li>
+<li>sizing</li>
+<li>decorations</li>
+<li>transitions</li>
+</ul>
+<p>There are three main ways to apply CSS styling. You can apply inline styles directly to HTML elements with the style attribute. Alternatively, you can place CSS rules within style tags in an HTML document. Finally, you can write CSS rules in an external style sheet, then reference that file in the HTML document. Even though the first two options have their use cases, most developers prefer external style sheets because they keep the styles separate from the HTML elements. This improves the readability and reusability of your code. The idea behind CSS is that you can use a selector to target an HTML element in the DOM (Document Object Model) and then apply a variety of attributes to that element to change the way it is displayed on the page.</p>
+<p>Now let's change the color of some text. See the following code:</p>
+<code>&lt;h1 style="color:red;"&gt;I am Red!&lt;/h1&gt;
+&lt;h2 style="color:blue;"&gt; I am Blue!&lt;/h1&gt;
+&lt;p style="color:blue; background-color: green;"&gt; I am blue with a background green!&lt;/p&gt;</code>
+<p>That's one way to specify the style of an element, but there's a better way to apply CSS.</p>
+<p>Make a &lt;style&gt;&lt;/style&gt; element (this is preferably done inside the head tag) or just go to the style tab and type out this:</p>
+<code>h1 {
+color: blue;
+}
+h2, h3 { /* This is a CSS comment */
+color: red;
+border: dashed 5px yellow;
+}
+p {
+color: green;
+height: 100px;
+width: 80%;
+overflow: auto; /* If text size is more than 100px height or 80% width then this will make a scroll bar */
+border: solid 2px red; /* solid or dashed, size, and color */
+text-align: center;
+}
+span {
+color: red;
+background-color: gray;
+font-size: 1.2em; /* font size can also be set using px which is pixels, eg 20px */
+font-family: Verdana; /* Fonts */
+}
+.pi { /* Using the class selector .pi (selecting any element with class of pi ) */
+color:pink;
+}</code>
+<p>And in the HTML tab (or in the body) type out this:</p>
+<code>&lt;h1&gt;Something cool&lt;/h1&gt;
+&lt;h2&gt;Cool, Part 1&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;
+&lt;p class="pi"&gt;Lorem ipsum dolor sit amet&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Lorem ipsum dolor sit amet&lt;br&gt;Lorem ipsum dolor sit amet&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;
+&lt;h2&gt;Cool, Part 2&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Lorem ipsum dolor sit amet&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Lorem i&lt;span&gt;p&lt;/span&gt;sum dolor sit &lt;span&gt;amet&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="pi"&gt;Lorem ipsum&lt;/span&gt; dolor &lt;span&gt;sit&lt;/span&gt; amet&lt;/p&gt;
+&lt;h1&gt;&lt;span&gt;Bye!&lt;/span&gt;&lt;/h1&gt;</code>
+<p>Try the HTML with and without the CSS, and then tweak the CSS for different results and remember that CSS can be applied to any tag!</p>
+<p>A helpful <i>class</i> attribute diversifies what you can select with CSS</p>
+<p>If your interested in CSS, then you can discover new properties by going to the CSS reference</p>
+<h1>Basic JavaScript</h1>
+<p>JavaScript is a high-level programming language that all modern web browsers support. It is also one of the core technologies of the web, along with HTML and CSS that you may have learned previously. This section will not cover most JavaScript programming concepts, which range from variables and arithmetic to objects and loops - that you can find in the JavaScript tab (after learning simpler programming, like BASIC) but just a few simple concepts which will drastically increase your Web Page's interactions.</p>
+<p>Javascript is stored in <i>&lt;script&gt; ... &lt;/script&gt;</i> tags, preferably in the head tag, but the Code Cauldron takes care of all that, so you needn't worry about it! Just head over to the JavaScript tab!</p>
+<p>Quick note: JavaScript commenting is the same as CSS commenting</p>
+<p>But this simple button in your HTML:</p>
+<code>&lt;button onclick="myFunc()"&gt;Click Me!&lt;/button&gt;</code>
+<p>And this JavaScript:</p>
+<code>/* This is a function */
+function myFunc() {
+alert("Hello, World!"); /* The alert creates a popup */
+}</code>
+<p>What this does is, when the button is clicked, it calls a JavaScript <i>function</i> which you defined as <i>myFunc</i>. The function <i>myFunc</i> then created a popup using the <i>alert</i> box.</p>
+<p>Lets try out some more complex Javascript codes</p>
+<p>Keeping the same HTML, use this</p>
+<code>var n = 0; /* Makes a variable n and sets it to 0 (which is a number[integer type]) */
+function myFunc() {
+n = n + 1; /* Adds 1 to n */
+alert("You clicked me "+String(n)+" time(s)!"); /* Changes n to a text form(string type) and shows it */
+}</code>
+<p>Now try one last one:</p>
+<p>HTML</p>
+<code>&lt;input type="text" name="n" id="n" placeholder="Enter Your Name"&gt;
+&lt;button onclick="myFunc()"&gt;Go!&lt;/button&gt;
+&lt;h1 id="show"&gt;&lt;/h1&gt;</code>
+<p>And JavaScript</p>
+<code>function myFunc() {
+var name = document.getElementById("n").value; /* Gets the value of id 'n' and stores it in a string variable name */
+document.getElementById("show").innerHTML = "Hello, "+name+"!"; /* Sets the html of id 'show' to "Hello, "+name+"!" */
+}</code>
+<br><br>
+<p><i><b>Congratulations! You have completed the Code Cauldron's basic web development tutorial! Have fun and Happy Coding!</i></b></p>
+</div>
+<div class="tab-pane fade" id="htmlref">
+<br>
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+</div>
+<input type="text" class="form-control" id="search" placeholder="Search Tags" aria-label="Search Tags" aria-describedby="basic-addon1" onkeyup="tagSearch();">
+</div>
+ <table class="table table-striped table-hover" id="tagstable">
+<tr>
+<th style="width:25%">Tag</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="table-info">&lt;!--...--&gt;</td>
+<td>Defines a comment</td>
+</tr>
+<tr>
+<td class="table-info">&lt;!DOCTYPE&gt;&nbsp;</td>
+<td>Defines the document type</td>
+</tr>
+<tr>
+<td class="table-info">&lt;a&gt;</td>
+<td>Defines a hyperlink</td>
+</tr>
+<tr>
+<td class="table-info">&lt;abbr&gt;</td>
+<td>Defines an abbreviation or an acronym</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;acronym&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use <a href="tag_abbr.asp">&lt;abbr&gt;</a> instead.<br></span>Defines an acronym</td>
+</tr>
+<tr>
+<td class="table-info">&lt;address&gt;</td>
+<td>Defines contact information for the author/owner of a document</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;applet&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use &lt;embed&gt; or &lt;object&gt; instead.<br></span>Defines an embedded applet</td>
+</tr>
+<tr>
+<td class="table-info">&lt;area&gt;</td>
+<td>Defines an area inside an image-map</td>
+</tr>
+<tr>
+<td class="table-success">&lt;article&gt;</td>
+<td>Defines an article</td>
+</tr>
+<tr>
+<td class="table-success">&lt;aside&gt;</td>
+<td>Defines content aside from the page content</td>
+</tr>
+<tr>
+<td class="table-success">&lt;audio&gt;</td>
+<td>Defines sound content</td>
+</tr>
+<tr>
+<td class="table-info">&lt;b&gt;</td>
+<td>Defines bold text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;base&gt;</td>
+<td>Specifies the base URL/target for all relative URLs in a document</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;basefont&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use CSS instead.<br></span>Specifies a default color, size, and font for all text in a document</td>
+</tr>
+<tr>
+<td class="table-success">&lt;bdi&gt;</td>
+<td>Isolates a part of text that might be formatted in a different direction from other text outside it</td>
+</tr>
+<tr>
+<td class="table-info">&lt;bdo&gt;</td>
+<td>Overrides the current text direction</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;big&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use CSS instead.<br></span>Defines big text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;blockquote&gt;</td>
+<td>Defines a section that is quoted from another source</td>
+</tr>
+<tr>
+<td class="table-info">&lt;body&gt;</td>
+<td>Defines the document's body</td>
+</tr>
+<tr>
+<td class="table-info">&lt;br&gt;</td>
+<td>Defines a single line break</td>
+</tr>
+<tr>
+<td class="table-info">&lt;button&gt;</td>
+<td>Defines a clickable button</td>
+</tr>
+<tr>
+<td class="table-success">&lt;canvas&gt;</td>
+<td>Used to draw graphics, on the fly, via scripting (usually JavaScript)</td>
+</tr>
+<tr>
+<td class="table-info">&lt;caption&gt;</td>
+<td>Defines a table caption</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;center&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use CSS instead.<br></span>Defines centered text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;cite&gt;</td>
+<td>Defines the title of a work</td>
+</tr>
+<tr>
+<td class="table-info">&lt;code&gt;</td>
+<td>Defines a piece of computer code</td>
+</tr>
+<tr>
+<td class="table-info">&lt;col&gt;</td>
+<td>Specifies column properties for each column within a &lt;colgroup&gt; element&nbsp;</td>
+</tr>
+<tr>
+<td class="table-info">&lt;colgroup&gt;</td>
+<td>Specifies a group of one or more columns in a table for formatting</td>
+</tr>
+<tr>
+<td class="table-success">&lt;data&gt;</td>
+<td>Links the given content with a machine-readable translation</td>
+</tr>
+<tr>
+<td class="table-success">&lt;datalist&gt;</td>
+<td>Specifies a list of pre-defined options for input controls</td>
+</tr>
+<tr>
+<td class="table-info">&lt;dd&gt;</td>
+<td>Defines a description/value of a term in a description list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;del&gt;</td>
+<td>Defines text that has been deleted from a document</td>
+</tr>
+<tr>
+<td class="table-success">&lt;details&gt;</td>
+<td>Defines additional details that the user can view or hide</td>
+</tr>
+<tr>
+<td class="table-info">&lt;dfn&gt;</td>
+<td>Represents the defining instance of a term</td>
+</tr>
+<tr>
+<td class="table-success">&lt;dialog&gt;</td>
+<td>Defines a dialog box or window</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;dir&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use &lt;ul&gt; instead.<br></span>Defines a directory list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;div&gt;</td>
+<td>Defines a section in a document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;dl&gt;</td>
+<td>Defines a description list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;dt&gt;</td>
+<td>Defines a term/name in a description list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;em&gt;</td>
+<td>Defines emphasized text&nbsp;</td>
+</tr>
+<tr>
+<td class="table-success">&lt;embed&gt;</td>
+<td>Defines a container for an external (non-HTML) application</td>
+</tr>
+<tr>
+<td class="table-info">&lt;fieldset&gt;</td>
+<td>Groups related elements in a form</td>
+</tr>
+<tr>
+<td class="table-success">&lt;figcaption&gt;</td>
+<td>Defines a caption for a &lt;figure&gt; element</td>
+</tr>
+<tr>
+<td class="table-success">&lt;figure&gt;</td>
+<td>Specifies self-contained content</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;font&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use CSS instead.<br></span>Defines font, color, and size for text</td>
+</tr>
+<tr>
+<td class="table-success">&lt;footer&gt;</td>
+<td>Defines a footer for a document or section</td>
+</tr>
+<tr>
+<td class="table-info">&lt;form&gt;</td>
+<td>Defines an HTML form for user input</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;frame&gt;</td>
+<td><span class="table-danger">Not supported in HTML5.<br></span>Defines a window (a frame) in a frameset</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;frameset&gt;</td>
+<td><span class="table-danger">Not supported in HTML5.<br></span>Defines a set of frames</td>
+</tr>
+<tr>
+<td class="table-info">&lt;h1&gt; to &lt;h6&gt;</td>
+<td> Defines HTML headings</td>
+</tr>
+<tr>
+<td class="table-info">&lt;head&gt;</td>
+<td>Defines information about the document</td>
+</tr>
+<tr>
+<td class="table-success">&lt;header&gt;</td>
+<td>Defines a header for a document or section</td>
+</tr>
+<tr>
+<td class="table-info">&lt;hr&gt;</td>
+<td> Defines a thematic change in the content</td>
+</tr>
+<tr>
+<td class="table-info">&lt;html&gt;</td>
+<td>Defines the root of an HTML document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;i&gt;</td>
+<td>Defines a part of text in an alternate voice or mood</td>
+</tr>
+<tr>
+<td class="table-info">&lt;iframe&gt;</td>
+<td>Defines an inline frame</td>
+</tr>
+<tr>
+<td class="table-info">&lt;img&gt;</td>
+<td>Defines an image</td>
+</tr>
+<tr>
+<td class="table-info">&lt;input&gt;</td>
+<td>Defines an input control</td>
+</tr>
+<tr>
+<td class="table-info">&lt;ins&gt;</td>
+<td>Defines a text that has been inserted into a document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;kbd&gt;</td>
+<td>Defines keyboard input</td>
+</tr>
+<tr>
+<td class="table-info">&lt;label&gt;</td>
+<td>Defines a label&nbsp;for an &lt;input&gt; element</td>
+</tr>
+<tr>
+<td class="table-info">&lt;legend&gt;</td>
+<td>Defines a caption for a &lt;fieldset&gt; element</td>
+</tr>
+<tr>
+<td class="table-info">&lt;li&gt;</td>
+<td>Defines a list item</td>
+</tr>
+<tr>
+<td class="table-info">&lt;link&gt;</td>
+<td>Defines the relationship between a document and an external resource (most used to link to style sheets)</td>
+</tr>
+<tr>
+<td class="table-success">&lt;main&gt;</td>
+<td>Specifies the main content of a document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;map&gt;</td>
+<td>Defines a client-side image-map</td>
+</tr>
+<tr>
+<td class="table-success">&lt;mark&gt;</td>
+<td>Defines marked/highlighted text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;meta&gt;</td>
+<td>Defines metadata about an HTML document</td>
+</tr>
+<tr>
+<td class="table-success">&lt;meter&gt;</td>
+<td>Defines a scalar measurement within a known range (a gauge)</td>
+</tr>
+<tr>
+<td class="table-success">&lt;nav&gt;</td>
+<td>Defines navigation links</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;noframes&gt;</td>
+<td><span class="table-danger">Not supported in HTML5.<br></span>Defines an alternate content for users that do not support frames</td>
+</tr>
+<tr>
+<td class="table-info">&lt;noscript&gt;</td>
+<td>Defines an alternate content for users that do not support client-side scripts</td>
+</tr>
+<tr>
+<td class="table-info">&lt;object&gt;</td>
+<td>Defines an embedded object</td>
+</tr>
+<tr>
+<td class="table-info">&lt;ol&gt;</td>
+<td>Defines an ordered list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;optgroup&gt;</td>
+<td>Defines a group of related options in a drop-down list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;option&gt;</td>
+<td>Defines an option in a drop-down list</td>
+</tr>
+<tr>
+<td class="table-success">&lt;output&gt;</td>
+<td>Defines the result of a calculation</td>
+</tr>
+<tr>
+<td class="table-info">&lt;p&gt;</td>
+<td>Defines a paragraph</td>
+</tr>
+<tr>
+<td class="table-info">&lt;param&gt;</td>
+<td>Defines a parameter for an object</td>
+</tr>
+<tr>
+<td class="table-success">&lt;picture&gt;</td>
+<td>Defines a container for multiple image resources</td>
+</tr>
+<tr>
+<td class="table-info">&lt;pre&gt;</td>
+<td>Defines preformatted text</td>
+</tr>
+<tr>
+<td class="table-success">&lt;progress&gt;</td>
+<td>Represents the progress of a task</td>
+</tr>
+<tr>
+<td class="table-info">&lt;q&gt;</td>
+<td>Defines a short quotation</td>
+</tr>
+<tr>
+<td class="table-success">&lt;rp&gt;</td>
+<td>Defines what to show in browsers that do not support ruby annotations</td>
+</tr>
+<tr>
+<td class="table-success">&lt;rt&gt;</td>
+<td>Defines an explanation/pronunciation of characters (for East Asian typography)
+</td>
+</tr>
+<tr>
+<td class="table-success">&lt;ruby&gt;</td>
+<td>Defines a ruby annotation (for East Asian typography)</td>
+</tr>
+<tr>
+<td class="table-info">&lt;s&gt;</td>
+<td>Defines text that is no longer correct</td>
+</tr>
+<tr>
+<td class="table-info">&lt;samp&gt;</td>
+<td>Defines sample output from a computer program</td>
+</tr>
+<tr>
+<td class="table-info">&lt;script&gt;</td>
+<td>Defines a client-side script</td>
+</tr>
+<tr>
+<td class="table-success">&lt;section&gt;</td>
+<td>Defines a section in a document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;select&gt;</td>
+<td>Defines a drop-down list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;small&gt;</td>
+<td>Defines smaller text</td>
+</tr>
+<tr>
+<td class="table-success">&lt;source&gt;</td>
+<td>Defines multiple media resources for media elements (&lt;video&gt; and &lt;audio&gt;)</td>
+</tr>
+<tr>
+<td class="table-info">&lt;span&gt;</td>
+<td>Defines a section in a document</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;strike&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use &lt;del&gt; or &lt;s&gt; instead.<br></span>Defines strikethrough text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;strong&gt;</td>
+<td>Defines important text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;style&gt;</td>
+<td>Defines style information for a document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;sub&gt;</td>
+<td>Defines subscripted text</td>
+</tr>
+<tr>
+<td class="table-success">&lt;summary&gt;</td>
+<td>Defines a visible heading for a &lt;details&gt; element</td>
+</tr>
+<tr>
+<td class="table-info">&lt;sup&gt;</td>
+<td>Defines superscripted text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;svg&gt;</td>
+<td>Defines a container for SVG graphics</td>
+</tr>
+<tr>
+<td class="table-info">&lt;table&gt;</td>
+<td>Defines a table</td>
+</tr>
+<tr>
+<td class="table-info">&lt;tbody&gt;</td>
+<td>Groups the body content in a table</td>
+</tr>
+<tr>
+<td class="table-info">&lt;td&gt;</td>
+<td>Defines a cell in a table</td>
+</tr>
+<tr>
+<td class="table-success">&lt;template&gt;</td>
+<td>Defines a template</td>
+</tr>
+<tr>
+<td class="table-info">&lt;textarea&gt;</td>
+<td>Defines a multiline input control (text area)</td>
+</tr>
+<tr>
+<td class="table-info">&lt;tfoot&gt;</td>
+<td>Groups the footer content in a table</td>
+</tr>
+<tr>
+<td class="table-info">&lt;th&gt;</td>
+<td>Defines a header cell in a table</td>
+</tr>
+<tr>
+<td class="table-info">&lt;thead&gt;</td>
+<td>Groups the header content in a table</td>
+</tr>
+<tr>
+<td class="table-success">&lt;time&gt;</td>
+<td>Defines a date/time</td>
+</tr>
+<tr>
+<td class="table-info">&lt;title&gt;</td>
+<td>Defines a title for the document</td>
+</tr>
+<tr>
+<td class="table-info">&lt;tr&gt;</td>
+<td>Defines a row in a table</td>
+</tr>
+<tr>
+<td class="table-success">&lt;track&gt;</td>
+<td>Defines text tracks for media elements (&lt;video&gt; and &lt;audio&gt;)</td>
+</tr>
+<tr>
+<td class="table-danger">&lt;tt&gt;</td>
+<td><span class="table-danger">Not supported in HTML5. Use CSS instead.<br></span>Defines teletype text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;u&gt;</td>
+<td>Defines text that should be stylistically different from normal text</td>
+</tr>
+<tr>
+<td class="table-info">&lt;ul&gt;</td>
+<td>Defines an unordered list</td>
+</tr>
+<tr>
+<td class="table-info">&lt;var&gt;</td>
+<td>Defines a variable</td>
+</tr>
+<tr>
+<td class="table-success">&lt;video&gt;</td>
+<td>Defines a video or movie</td>
+</tr>
+<tr>
+<td class="table-success">&lt;wbr&gt;</td>
+<td>Defines a possible line-break</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="tab-pane fade" id="cssref">
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+</div>
+<input type="text" class="form-control" id="ssearch" placeholder="Search Styles" aria-label="Search Styles" aria-describedby="basic-addon1" onkeyup="styleSearch();">
+</div>
+<table class="table table-striped table-hover" id="stylestable">
+<tr>
+<td>align-content</td>
+<td>Specifies the alignment between the lines inside a flexible container when the items do not use all available space</td>
+</tr>
+<tr>
+<td>align-items</td>
+<td>Specifies the alignment for items inside a flexible container</td>
+</tr>
+<tr>
+<td>align-self</td>
+<td>Specifies the alignment for selected items inside a flexible container</td>
+</tr>
+<tr>
+<td>all</td>
+<td>Resets all properties (except unicode-bidi and direction)</td>
+</tr>
+<tr>
+<td>animation</td>
+<td>A shorthand property for all the animation-* properties</td>
+</tr>
+<tr>
+<td>animation-delay</td>
+<td>Specifies a delay for the start of an animation</td>
+</tr>
+<tr>
+<td>animation-direction</td>
+<td>Specifies whether an animation should be played forwards, backwards or in alternate cycles</td>
+</tr>
+<tr>
+<td>animation-duration</td>
+<td>Specifies how long an animation should take to complete one cycle</td>
+</tr>
+<tr>
+<td>animation-fill-mode</td>
+<td>Specifies a style for the element when the animation is not playing (before it starts, after it ends, or both)</td>
+</tr>
+<tr>
+<td>animation-iteration-count</td>
+<td>Specifies the number of times an animation should be played</td>
+</tr>
+<tr>
+<td>animation-name</td>
+<td>Specifies a name for the @keyframes animation</td>
+</tr>
+ <tr>
+<td>animation-play-state</td>
+<td>Specifies whether the animation is running or paused</td>
+</tr>
+<tr>
+<td>animation-timing-function</td>
+<td>Specifies the speed curve of an animation</td>
+</tr>
+<tr>
+<td width="30%">backface-visibility</td>
+<td>Defines whether or not the back face of an element should be visible when facing the user</td>
+</tr>
+<tr>
+<td>background</td>
+<td>A shorthand property for all the background-* properties</td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td>Sets whether a background image scrolls with the rest of the page, or is fixed</td>
+</tr>
+<tr>
+<td>background-blend-mode</td>
+<td>Specifies the blending mode of each background layer (color/image)</td>
+</tr>
+<tr>
+<td>background-clip</td>
+<td>Defines how far the background (color or image) should extend within an element
+</td>
+</tr>
+<tr>
+<td>background-color</td>
+<td>Specifies the background color of an element</td>
+</tr>
+<tr>
+<td>background-image</td>
+<td>Specifies one or more background images for an element</td>
+</tr>
+<tr>
+<td>background-origin</td>
+<td>Specifies the origin position of a background image</td>
+</tr>
+<tr>
+<td>background-position</td>
+<td>Specifies the position of a background image</td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td>Sets if/how a background image will be repeated</td>
+</tr>
+<tr>
+<td>background-size</td>
+<td>Specifies the size of the background images</td>
+</tr>
+<tr>
+<td>border</td>
+<td>A shorthand property for border-width, border-style and border-color</td>
+</tr>
+<tr>
+<td>border-bottom</td>
+<td>A shorthand property for border-bottom-width, border-bottom-style and border-bottom-color</td>
+</tr>
+<tr>
+<td>border-bottom-color</td>
+<td>Sets the color of the bottom border</td>
+</tr>
+<tr>
+<td>border-bottom-left-radius</td>
+<td>Defines the radius of the border of the bottom-left corner</td>
+</tr>
+<tr>
+<td>border-bottom-right-radius</td>
+<td>Defines the radius of the border of the bottom-right corner</td>
+</tr>
+<tr>
+<td>border-bottom-style</td>
+<td>Sets the style of the bottom border</td>
+</tr>
+<tr>
+<td>border-bottom-width</td>
+<td>Sets the width of the bottom border</td>
+</tr>
+<tr>
+<td>border-collapse</td>
+<td>Sets whether table borders should collapse into a single border or be separated</td>
+</tr>
+<tr>
+<td>border-color</td>
+<td>Sets the color of the four borders</td>
+</tr>
+<tr>
+<td>border-image</td>
+<td>A shorthand property for all the border-image-* properties</td>
+</tr>
+<tr>
+<td>border-image-outset</td>
+<td>Specifies the amount by which the border image area extends beyond the border box</td>
+</tr>
+<tr>
+<td>border-image-repeat</td>
+<td>Specifies whether the border image should be repeated, rounded or stretched</td>
+</tr>
+<tr>
+<td>border-image-slice</td>
+<td>Specifies how to slice the border image</td>
+</tr>
+<tr>
+<td>border-image-source</td>
+<td>Specifies the path to the image to be used as a border</td>
+</tr>
+<tr>
+<td>border-image-width</td>
+<td>Specifies the width of the border image</td>
+</tr>
+<tr>
+<td>border-left</td>
+<td>A shorthand property for all the border-left-* properties</td>
+ </tr>
+<tr>
+<td>border-left-color</td>
+<td>Sets the color of the left border</td>
+</tr>
+<tr>
+<td>border-left-style</td>
+<td>Sets the style of the left border</td>
+</tr>
+<tr>
+<td>border-left-width</td>
+<td>Sets the width of the left border</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>A shorthand property for the four border-*-radius properties</td>
+</tr>
+<tr>
+<td>border-right</td>
+<td>A shorthand property for all the border-right-* properties</td>
+</tr>
+<tr>
+<td>border-right-color</td>
+<td>Sets the color of the right border</td>
+</tr>
+<tr>
+<td>border-right-style</td>
+<td>Sets the style of the right border</td>
+</tr>
+<tr>
+<td>border-right-width</td>
+<td>Sets the width of the right border</td>
+</tr>
+<tr>
+<td>border-spacing</td>
+<td>Sets the distance between the borders of adjacent cells</td>
+</tr>
+<tr>
+<td>border-style</td>
+<td>Sets the style of the four borders</td>
+</tr>
+<tr>
+<td>border-top</td>
+<td>A shorthand property for border-top-width, border-top-style and border-top-color
+</td>
+</tr>
+<tr>
+<td>border-top-color</td>
+<td>Sets the color of the top border</td>
+</tr>
+<tr>
+<td>border-top-left-radius</td>
+<td>Defines the radius of the border of the top-left corner</td>
+</tr>
+<tr>
+<td>border-top-right-radius</td>
+<td>Defines the radius of the border of the top-right corner</td>
+</tr>
+<tr>
+<td>border-top-style</td>
+<td>Sets the style of the top border</td>
+</tr>
+<tr>
+<td>border-top-width</td>
+<td>Sets the width of the top border</td>
+</tr>
+<tr>
+<td>border-width</td>
+<td>Sets the width of the four borders</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>Sets the elements position, from the bottom of its parent element</td>
+</tr>
+<tr>
+<td>box-decoration-break</td>
+<td>Sets the behavior of the background and border of an element at page-break, or, for in-line elements, at line-break.</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>Attaches one or more shadows to an element</td>
+</tr>
+<tr>
+<td>box-sizing</td>
+<td>Defines how the width and height of an element are calculated: should they include padding and borders, or not</td>
+</tr>
+<tr>
+<td>break-after</td>
+<td>Specifies the page-, column-, or region-break behavior after the generated box</td>
+</tr>
+<tr>
+<td>break-before</td>
+<td>Specifies the page-, column-, or region-break behavior before the generated box</td>
+</tr>
+<tr>
+<td>break-inside</td>
+<td>Specifies the page-, column-, or region-break behavior inside the generated box</td>
+</tr>
+<tr>
+<td>caption-side</td>
+<td>Specifies the placement of a table caption</td>
+</tr>
+<tr>
+<td>caret-color</td>
+<td>Specifies the color of the cursor (caret) in inputs, textareas, or any element that is editable</td>
+</tr>
+<tr>
+<td>@charset</td>
+<td>Specifies the character encoding used in the style sheet</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>Specifies on which sides of an element floating elements are not allowed to float</td>
+</tr>
+<tr>
+<td>clip</td>
+<td>Clips an absolutely positioned element</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Sets the color of text</td>
+</tr>
+<tr>
+<td>column-count</td>
+<td>Specifies the number of columns an element should be divided into</td>
+</tr>
+<tr>
+<td>column-fill</td>
+<td>Specifies how to fill columns, balanced or not</td>
+</tr>
+<tr>
+<td>column-gap</td>
+<td>Specifies the gap between the columns</td>
+</tr>
+<tr>
+<td>column-rule</td>
+<td>A shorthand property for all the column-rule-* properties</td>
+</tr>
+<tr>
+<td>column-rule-color</td>
+<td>Specifies the color of the rule between columns</td>
+</tr>
+<tr>
+<td>column-rule-style</td>
+<td>Specifies the style of the rule between columns</td>
+</tr>
+<tr>
+<td>column-rule-width</td>
+<td>Specifies the width of the rule between columns</td>
+</tr>
+<tr>
+<td>column-span</td>
+<td>Specifies how many columns an element should span across</td>
+</tr>
+<tr>
+<td>column-width</td>
+<td>Specifies the column width</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>A shorthand property for column-width and column-count</td>
+</tr>
+<tr>
+<td>content</td>
+<td>Used with the :before and :after pseudo-elements, to insert generated content</td>
+</tr>
+<tr>
+<td>counter-increment</td>
+<td>Increases or decreases the value of one or more CSS counters</td>
+</tr>
+<tr>
+<td>counter-reset</td>
+<td>Creates or resets one or more CSS counters</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>Specifies the mouse cursor to be displayed when pointing over an element</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>Specifies the text direction/writing direction</td>
+</tr>
+<tr>
+<td>display</td>
+<td>Specifies how a certain HTML element should be displayed</td>
+</tr>
+<tr>
+<td width="20%">empty-cells</td>
+<td>Specifies whether or not to display borders and background on empty cells in a table</td>
+</tr>
+<tr>
+<td width="20%">filter</td>
+<td>Defines effects (e.g. blurring or color shifting) on an element before the element is displayed</td>
+</tr>
+<tr>
+<td>flex</td>
+<td>A shorthand property for the flex-grow, flex-shrink, and the flex-basis properties
+</td>
+</tr>
+<tr>
+<td>flex-basis</td>
+<td>Specifies the initial length of a flexible item</td>
+</tr>
+<tr>
+<td>flex-direction</td>
+<td>Specifies the direction of the flexible items</td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td>A shorthand property for the flex-direction and the flex-wrap properties</td>
+</tr>
+<tr>
+<td>flex-grow</td>
+<td>Specifies how much the item will grow relative to the rest</td>
+</tr>
+<tr>
+<td>flex-shrink</td>
+<td>Specifies how the item will shrink relative to the rest</td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td>Specifies whether the flexible items should wrap or not</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Specifies whether or not a box should float</td>
+</tr>
+<tr>
+<td>font</td>
+<td>A shorthand property for the font-style, font-variant, font-weight, font-size/line-height, and the font-family properties</td>
+</tr>
+<tr>
+<td>@font-face</td>
+<td>A rule that allows websites to download and use fonts other than the "web-safe" fonts</td>
+</tr>
+<tr>
+<td>font-family</td>
+<td>Specifies the font family for text</td>
+</tr>
+<tr>
+<td>font-feature-settings</td>
+<td>Allows control over advanced typographic features in OpenType fonts</td>
+ </tr>
+<tr>
+<td>@font-feature-values</td>
+<td>Allows authors to use a common name in font-variant-alternate for feature activated differently in OpenType</td>
+</tr>
+<tr>
+<td>font-kerning</td>
+<td>Controls the usage of the kerning information (how letters are spaced)</td>
+</tr>
+<tr>
+<td>font-language-override</td>
+<td>Controls the usage of language-specific glyphs in a typeface</td>
+</tr>
+<tr>
+<td>font-size</td>
+<td>Specifies the font size of text</td>
+</tr>
+<tr>
+<td>font-size-adjust</td>
+<td>Preserves the readability of text when font fallback occurs</td>
+</tr>
+<tr>
+<td>font-stretch</td>
+<td>Selects a normal, condensed, or expanded face from a font family</td>
+</tr>
+<tr>
+<td>font-style</td>
+<td>Specifies the font style for text</td>
+</tr>
+<tr>
+<td>font-synthesis</td>
+<td>Controls which missing typefaces (bold or italic) may be synthesized by the browser</td>
+</tr>
+<tr>
+<td>font-variant</td>
+<td>Specifies whether or not a text should be displayed in a small-caps font</td>
+</tr>
+<tr>
+<td>font-variant-alternates</td>
+<td>Controls the usage of alternate glyphs associated to alternative names defined in @font-feature-values</td>
+</tr>
+<tr>
+<td>font-variant-caps</td>
+<td>Controls the usage of alternate glyphs for capital letters</td>
+</tr>
+<tr>
+<td>font-variant-east-asian</td>
+<td>Controls the usage of alternate glyphs for East Asian scripts (e.g Japanese and Chinese)</td>
+</tr>
+<tr>
+<td>font-variant-ligatures</td>
+<td>Controls which ligatures and contextual forms are used in textual content of the elements it applies to</td>
+</tr>
+<tr>
+<td>font-variant-numeric</td>
+<td>Controls the usage of alternate glyphs for numbers, fractions, and ordinal markers</td>
+</tr>
+<tr>
+<td>font-variant-position</td>
+<td>Controls the usage of alternate glyphs of smaller size positioned as superscript or subscript regarding the baseline of the font</td>
+</tr>
+<tr>
+<td>font-weight</td>
+<td>Specifies the weight of a font</td>
+</tr>
+<tr>
+<td width="20%">grid</td>
+<td>A shorthand property for the grid-template-rows, grid-template-columns, grid-template-areas, grid-auto-rows, grid-auto-columns, and the grid-auto-flow properties</td>
+</tr>
+<tr>
+<td>grid-area</td>
+<td>Either specifies a name for the grid item, or this property is a shorthand property for the grid-row-start, grid-column-start, grid-row-end, and grid-column-end properties</td>
+</tr>
+<tr>
+<td>grid-auto-columns</td>
+<td>Specifies a default column size</td>
+</tr>
+<tr>
+<td>grid-auto-flow</td>
+<td>Specifies how auto-placed items are inserted in the grid</td>
+</tr>
+<tr>
+<td>grid-auto-rows</td>
+<td>Specifies a default row size</td>
+</tr>
+<tr>
+<td>grid-column</td>
+<td>A shorthand property for the grid-column-start and the grid-column-end properties</td>
+</tr>
+<tr>
+<td>grid-column-end</td>
+<td>Specifies where to end the grid item</td>
+</tr>
+<tr>
+<td>grid-column-gap</td>
+<td>Specifies the size of the gap between columns</td>
+</tr>
+<tr>
+<td>grid-column-start</td>
+<td>Specifies where to start the grid item</td>
+</tr>
+<tr>
+<td>grid-gap</td>
+<td>A shorthand property for the grid-row-gap and grid-column-gap properties</td>
+</tr>
+<tr>
+<td>grid-row</td>
+<td>A shorthand property for the grid-row-start and the grid-row-end properties</td>
+</tr>
+<tr>
+<td>grid-row-end</td>
+<td>Specifies where to end the grid item</td>
+</tr>
+<tr>
+<td>grid-row-gap</td>
+<td>Specifies the size of the gap between rows</td>
+</tr>
+<tr>
+<td>grid-row-start</td>
+<td>Specifies where to start the grid item</td>
+</tr>
+<tr>
+<td>grid-template</td>
+<td>A shorthand property for the grid-template-rows, grid-template-columns and grid-areas properties</td>
+</tr>
+<tr>
+<td>grid-template-areas</td>
+<td>Specifies how to display columns and rows, using named grid items</td>
+</tr>
+<tr>
+<td>grid-template-columns</td>
+<td>Specifies the size of the columns, and how many columns in a grid layout</td>
+</tr>
+<tr>
+<td>grid-template-rows</td>
+<td>Specifies the size of the rows in a grid layout</td>
+</tr>
+<tr>
+<td width="20%">hanging-punctuation</td>
+<td>Specifies whether a punctuation character may be placed outside the line box</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Sets the height of an element</td>
+</tr>
+<tr>
+<td>hyphens</td>
+<td>Sets how to split words to improve the layout of paragraphs</td>
+</tr>
+<tr>
+<td>image-rendering</td>
+<td>Gives a hint to the browser about what aspects of an image are most important to preserve when the image is scaled</td>
+</tr>
+<tr>
+<td>@import</td>
+<td>Allows you to import a style sheet into another style sheet</td>
+</tr>
+<tr>
+<td>isolation</td>
+<td>Defines whether an element must create a new stacking content</td>
+</tr>
+<tr>
+<td width="20%">justify-content</td>
+<td>Specifies the alignment between the items inside a flexible container when the items do not use all available space</td>
+</tr>
+<tr>
+<td width="20%">@keyframes</td>
+<td>Specifies the animation code</td>
+</tr>
+<tr>
+<td width="20%">left</td>
+<td>Specifies the left position of a positioned element</td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td>Increases or decreases the space between characters in a text</td>
+</tr>
+<tr>
+<td>line-break</td>
+<td>Specifies how/if to break lines</td>
+</tr>
+<tr>
+<td>line-height</td>
+<td>Sets the line height</td>
+</tr>
+<tr>
+<td>list-style</td>
+<td>Sets all the properties for a list in one declaration</td>
+</tr>
+<tr>
+<td>list-style-image</td>
+<td>Specifies an image as the list-item marker</td>
+</tr>
+<tr>
+<td>list-style-position</td>
+<td>Specifies the position of the list-item markers (bullet points)</td>
+</tr>
+<tr>
+<td>list-style-type</td>
+<td>Specifies the type of list-item marker</td>
+</tr>
+<tr>
+<td width="20%">margin</td>
+<td>Sets all the margin properties in one declaration</td>
+</tr>
+<tr>
+<td>margin-bottom</td>
+<td>Sets the bottom margin of an element</td>
+</tr>
+<tr>
+<td>margin-left</td>
+<td>Sets the left margin of an element</td>
+</tr>
+<tr>
+<td>margin-right</td>
+<td>Sets the right margin of an element</td>
+</tr>
+<tr>
+<td>margin-top</td>
+<td>Sets the top margin of an element</td>
+</tr>
+<tr>
+<td>max-height</td>
+<td>Sets the maximum height of an element</td>
+</tr>
+<tr>
+<td>max-width</td>
+<td>Sets the maximum width of an element</td>
+</tr>
+<tr>
+<td>@media</td>
+<td>Sets the style rules for different media types/devices/sizes</td>
+</tr>
+<tr>
+<td>min-height</td>
+<td>Sets the minimum height of an element</td>
+</tr>
+<tr>
+<td>min-width</td>
+<td>Sets the minimum width of an element</td>
+</tr>
+<tr>
+<td>mix-blend-mode</td>
+<td>Specifies how an element's content should blend with its direct parent background</td>
+</tr>
+<tr>
+<td width="20%">object-fit</td>
+<td>Specifies how the contents of a replaced element should be fitted to the box established by its used height and width</td>
+</tr>
+<tr>
+<td>object-position</td>
+<td>Specifies the alignment of the replaced element inside its box</td>
+</tr>
+<tr>
+<td>opacity</td>
+<td>Sets the opacity level for an element</td>
+</tr>
+<tr>
+<td>order</td>
+<td>Sets the order of the flexible item, relative to the rest</td>
+</tr>
+<tr>
+<td>orphans</td>
+<td>Sets the minimum number of lines that must be left at the bottom of a page when a page break occurs inside an element</td>
+</tr>
+<tr>
+<td>outline</td>
+<td>A shorthand property for the outline-width, outline-style, and the outline-color properties</td>
+</tr>
+<tr>
+<td>outline-color</td>
+<td>Sets the color of an outline</td>
+</tr>
+<tr>
+<td>outline-offset</td>
+<td>Offsets an outline, and draws it beyond the border edge</td>
+</tr>
+<tr>
+<td>outline-style</td>
+<td>Sets the style of an outline</td>
+</tr>
+<tr>
+<td>outline-width</td>
+<td>Sets the width of an outline</td>
+</tr>
+<tr>
+<td>overflow
+</td>
+<td>Specifies what happens if content overflows an element's box</td>
+</tr>
+<tr>
+<td>overflow-wrap</td>
+<td>Specifies whether or not the browser may break lines within words in order to prevent overflow (when a string is too long to fit its containing box)</td>
+</tr>
+<tr>
+<td>overflow-x</td>
+<td>Specifies whether or not to clip the left/right edges of the content, if it overflows the element's content area</td>
+</tr>
+<tr>
+<td>overflow-y</td>
+<td>Specifies whether or not to clip the top/bottom edges of the content, if it overflows the element's content area</td>
+</tr>
+<tr>
+<td width="20%">padding</td>
+<td>A shorthand property for all the padding-* properties</td>
+</tr>
+<tr>
+<td>padding-bottom</td>
+<td>Sets the bottom padding of an element</td>
+</tr>
+<tr>
+<td>padding-left</td>
+<td>Sets the left padding of an element</td>
+</tr>
+<tr>
+<td>padding-right</td>
+<td>Sets the right padding of an element</td>
+</tr>
+<tr>
+<td>padding-top</td>
+<td>Sets the top padding of an element</td>
+</tr>
+<tr>
+<td>page-break-after</td>
+<td>Sets the page-break behavior after an element</td>
+</tr>
+<tr>
+<td>page-break-before</td>
+<td>Sets the page-break behavior before an element</td>
+</tr>
+<tr>
+<td>page-break-inside</td>
+<td>Sets the page-break behavior inside an element</td>
+</tr>
+<tr>
+<td>perspective</td>
+<td>Gives a 3D-positioned element some perspective</td>
+</tr>
+<tr>
+<td>perspective-origin</td>
+<td>Defines at which position the user is looking at the 3D-positioned element</td>
+</tr>
+<tr>
+<td>pointer-events</td>
+<td>Defines whether or not an element reacts to pointer events</td>
+</tr>
+<tr>
+ <td>position</td>
+<td>Specifies the type of positioning method used for an element (static, relative, absolute or fixed)</td>
+</tr>
+<tr>
+<td>quotes</td>
+<td>Sets the type of quotation marks for embedded quotations</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>Defines if (and how) an element is resizable by the user</td>
+</tr>
+<tr>
+<td>right</td>
+<td>Specifies the right position of a positioned element</td>
+</tr>
+<tr>
+<td>scroll-behavior</td>
+<td>Specifies whether to smoothly animate the scroll position in a scrollable box, instead of a straight jump</td>
+</tr>
+<tr>
+<td>tab-size</td>
+<td>Specifies the width of a tab character</td>
+</tr>
+<tr>
+<td>table-layout</td>
+<td>Defines the algorithm used to lay out table cells, rows, and columns</td>
+</tr>
+<tr>
+<td>text-align</td>
+<td>Specifies the horizontal alignment of text</td>
+</tr>
+<tr>
+<td>text-align-last</td>
+<td>Describes how the last line of a block or a line right before a forced line break is aligned when text-align is "justify"</td>
+</tr>
+<tr>
+<td>text-combine-upright</td>
+<td>Specifies the combination of multiple characters into the space of a single character</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>Specifies the decoration added to text</td>
+</tr>
+<tr>
+<td>text-decoration-color</td>
+<td>Specifies the color of the text-decoration</td>
+</tr>
+<tr>
+<td>text-decoration-line</td>
+<td>Specifies the type of line in a text-decoration</td>
+</tr>
+<tr>
+<td>text-decoration-style</td>
+<td>Specifies the style of the line in a text decoration</td>
+</tr>
+<tr>
+<td>text-indent</td>
+<td>Specifies the indentation of the first line in a text-block</td>
+</tr>
+<tr>
+<td>text-justify</td>
+<td>Specifies the justification method used when text-align is "justify"</td>
+</tr>
+<tr>
+<td>text-orientation</td>
+<td>Defines the orientation of the text in a line</td>
+</tr>
+<tr>
+<td>text-overflow</td>
+<td>Specifies what should happen when text overflows the containing element</td>
+</tr>
+<tr>
+<td>text-shadow</td>
+<td>Adds shadow to text </td>
+</tr>
+<tr>
+<td>text-transform</td>
+<td>Controls the capitalization of text</td>
+</tr>
+<tr>
+<td>text-underline-position</td>
+<td>Specifies the position of the underline which is set using the text-decoration property</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Specifies the top position of a positioned element</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>Applies a 2D or 3D transformation to an element</td>
+</tr>
+<tr>
+<td>transform-origin</td>
+<td>Allows you to change the position on transformed elements</td>
+</tr>
+<tr>
+<td>transform-style</td>
+<td>Specifies how nested elements are rendered in 3D space</td>
+</tr>
+<tr>
+<td>transition</td>
+<td>A shorthand property for all the transition-* properties</td>
+</tr>
+<tr>
+<td>transition-delay</td>
+<td>Specifies when the transition effect will start</td>
+</tr>
+<tr>
+<td>transition-duration</td>
+<td>Specifies how many seconds or milliseconds a transition effect takes to complete</td>
+</tr>
+<tr>
+<td>transition-property</td>
+<td>Specifies the name of the CSS property the transition effect is for</td>
+</tr>
+<tr>
+<td>transition-timing-function</td>
+<td>Specifies the speed curve of the transition effect</td>
+</tr>
+<tr>
+<td>unicode-bidi</td>
+<td>Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document</td>
+</tr>
+<tr>
+<td>user-select</td>
+<td>Specifies whether the text of an element can be selected</td>
+</tr>
+<tr>
+<td width="20%">vertical-align</td>
+<td>Sets the vertical alignment of an element</td>
+</tr>
+<tr>
+<td>visibility</td>
+<td>Specifies whether or not an element is visible</td>
+</tr>
+<tr>
+<td>white-space</td>
+<td>Specifies how white-space inside an element is handled</td>
+</tr>
+<tr>
+<td>widows</td>
+<td>Sets the minimum number of lines that must be left at the top of a page when a page break occurs inside an element</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Sets the width of an element</td>
+</tr>
+<tr>
+<td>word-break</td>
+<td>Specifies how words should break when reaching the end of a line</td>
+</tr>
+<tr>
+<td>word-spacing</td>
+<td>Increases or decreases the space between words in a text</td>
+</tr>
+<tr>
+<td>word-wrap</td>
+<td>Allows long, unbreakable words to be broken and wrap to the next line</td>
+</tr>
+<tr>
+<td>writing-mode</td>
+<td>Specifies whether lines of text are laid out horizontally or vertically</td>
+</tr>
+<tr>
+<td>z-index</td>
+<td>Sets the stack order of a positioned element</td>
+</tr>
+</table>
+</div>
+<div class="tab-pane fade" id="jsref">
 <main id="main-doc">
 <section class="main-section" id="Introduction">
 <header>Introduction</header>
 <article>
-<p>JavaScript is a cross-platform, object-oriented scripting language. It is a small and lightweight language. Inside a host environment (for example, a web browser), JavaScript can be connected to the objects of its environment to provide programmatic control over them.</p>
-<p>JavaScript contains a standard library of objects, such as Array, Date, and Math, and a core set of language elements such as operators, control structures, and statements. Core JavaScript can be extended for a variety of purposes by supplementing it with additional objects; for example:</p>
-<li>Client-side JavaScript extends the core language by supplying objects to control a browser and its Document Object Model (DOM). For example, client-side extensions allow an application to place elements on an HTML form and respond to user events such as mouse clicks, form input, and page navigation.</li>
-<li>Server-side JavaScript extends the core language by supplying objects relevant to running JavaScript on a server. For example, server-side extensions allow an application to communicate with a database, provide continuity of information from one invocation to another of the application, or perform file manipulations on a server.</li>
-</article>
+<p>JavaScript is a cross-platform, object-oriented scripting language. It is a small and lightweight language. Inside a host environment (for example, a web browser), JavaScript can be connected to the objects of its environment to provide programmatic
+control over them.</p>
+<p>JavaScript contains a standard library of objects, such as Array, Date, and Math, and a core set of language elements such as operators, control structures, and statements. Core JavaScript can be extended for a variety of purposes by supplementing
+it with additional objects; for example:</p>
+<li>Client-side JavaScript extends the core language by supplying objects to control a browser and its Document Object Model (DOM). For example, client-side extensions allow an application to place elements on an HTML form and respond to user
+events such as mouse clicks, form input, and page navigation.</li>
+<li>Server-side JavaScript extends the core language by supplying objects relevant to running JavaScript on a server. For example, server-side extensions allow an application to communicate with a database, provide continuity of information from
+one invocation to another of the application, or perform file manipulations on a server.</li>
+</artice>
 </section>
 <section class="main-section" id="What_you_should_already_know">
 <header>What you should already know</header>
@@ -161,27 +1799,30 @@ code{
 <p>This guide assumes you have the following basic background:</p>
 <li>A general understanding of the Internet and the World Wide Web (WWW).</li>
 <li>Good working knowledge of HyperText Markup Language (HTML).</li>
-<li>Some programming experience.</li>
-</article>
+<li>Some programming experience. If you are new to programming, try learning an easier language like Scratch or Python first, or use a more low-level guide. </li>
+</artice>
 </section>
 <section class="main-section" id="JavaScript_and_Java">
-<header>JavaScript and Java</header>
+ <header>JavaScript and Java</header>
 <article>
-<p>JavaScript and Java are similar in some ways but fundamentally different in some others. The JavaScript language resembles Java but does not have Java's static typing and strong type checking. JavaScript follows most Java expression syntax, naming conventions and basic control-flow constructs which was the reason why it was renamed from LiveScript to JavaScript.</p>
-<p>In contrast to Java's compile-time system of classes built by declarations, JavaScript supports a runtime system based on a small number of data types representing numeric, Boolean, and string values. JavaScript has a prototype-based object model instead of the more common class-based object model. The prototype-based model provides dynamic inheritance; that is, what is inherited can vary for individual objects. JavaScript also supports functions without any special declarative requirements. Functions can be properties of objects, executing as loosely typed methods.</p>
-<p>JavaScript is a very free-form language compared to Java. You do not have to declare all variables, classes, and methods. You do not have to be concerned with whether methods are public, private, or protected, and you do not have to implement interfaces. Variables, parameters, and function return types are not explicitly typed.</p>
+<p>JavaScript and Java are similar in some ways but fundamentally different in some others. The JavaScript language resembles Java but does not have Java's static typing and strong type checking. JavaScript follows most Java expression syntax,
+naming conventions and basic control-flow constructs which was the reason why it was renamed from LiveScript to JavaScript.</p>
+<p>In contrast to Java's compile-time system of classes built by declarations, JavaScript supports a runtime system based on a small number of data types representing numeric, Boolean, and string values. JavaScript has a prototype-based object
+model instead of the more common class-based object model. The prototype-based model provides dynamic inheritance; that is, what is inherited can vary for individual objects. JavaScript also supports functions without any special declarative
+requirements. Functions can be properties of objects, executing as loosely typed methods.</p>
+<p>JavaScript is a very free-form language compared to Java. You do not have to declare all variables, classes, and methods. You do not have to be concerned with whether methods are public, private, or protected, and you do not have to implement
+interfaces. Variables, parameters, and function return types are not explicitly typed.</p>
 </article>
 </section>
 <section class="main-section" id="Hello_world">
 <header>Hello world</header>
 <article>
-To get started with writing JavaScript, open the JavaScript tab and write your first "Hello world" JavaScript code:
+To get started with writing JavaScript, got to the JS tab in the Cauldron and write your first "Hello world" JavaScript code:
 <code>function greetMe(yourName) {
 alert("Hello " + yourName);
 }
 greetMe("World");
-</code>
-Select the code in the pad and hit Ctrl+R to watch it unfold in your browser!
+</code> Copy paste it and watch your first JavaScript code unfold!
 </article>
 </section>
 <section class="main-section" id="Variables">
@@ -190,11 +1831,11 @@ Select the code in the pad and hit Ctrl+R to watch it unfold in your browser!
 You use variables as symbolic names for values in your application. The names of variables, called identifiers, conform to certain rules.
 </p>
 <p>
-A JavaScript identifier must start with a letter, underscore (_), or dollar sign ($); subsequent characters can also be digits (0-9). Because JavaScript is case sensitive, letters include the characters "A" through "Z" (uppercase) and the characters "a" through "z" (lowercase).
+A JavaScript identifier must start with a letter, underscore (_), or dollar sign ($); subsequent characters can also be digits (0-9). Because JavaScript is case sensitive, letters include the characters "A" through "Z" (uppercase) and the characters "a"
+through "z" (lowercase).
 </p>
 <p>
-You can use ISO 8859-1 or Unicode letters such as å and ü in identifiers. You can also use the Unicode escape sequences as characters in identifiers.
-Some examples of legal names are Number_hits, temp99, and _name.
+You can use ISO 8859-1 or Unicode letters such as å and ü in identifiers. You can also use the Unicode escape sequences as characters in identifiers. Some examples of legal names are Number_hits, temp99, and _name.
 </p>
 </section>
 <section class="main-section" id="Declaring_variables">
@@ -215,8 +1856,10 @@ With the keyword let. For example,<code> let y = 13.</code> This syntax can be u
 <section class="main-section" id="Variable_scope">
 <header>Variable scope</header>
 <article>
-<p> When you declare a variable outside of any function, it is called a global variable, because it is available to any other code in the current document. When you declare a variable within a function, it is called a local variable, because it is available only within that function.</p>
-<p>JavaScript before ECMAScript 2015 does not have block statement scope; rather, a variable declared within a block is local to the function (or global scope) that the block resides within. For example the following code will log 5, because the scope of x is the function (or global context) within which x is declared, not the block, which in this case is an if statement.</p>
+<p> When you declare a variable outside of any function, it is called a global variable, because it is available to any other code in the current document. When you declare a variable within a function, it is called a local variable, because it
+is available only within that function.</p>
+<p>JavaScript before ECMAScript 2015 does not have block statement scope; rather, a variable declared within a block is local to the function (or global scope) that the block resides within. For example the following code will log 5, because
+the scope of x is the function (or global context) within which x is declared, not the block, which in this case is an if statement.</p>
 <code>if (true) {
 var x = 5;
 }
@@ -233,13 +1876,15 @@ console.log(y);
 <header>Global variables</header>
 <article>
 <p>Global variables are in fact properties of the global object. In web pages the global object is window, so you can set and access global variables using the window.variable syntax.</p>
-<p>Consequently, you can access global variables declared in one window or frame from another window or frame by specifying the window or frame name. For example, if a variable called phoneNumber is declared in a document, you can refer to this variable from an iframe as parent.phoneNumber.</p>
+<p>Consequently, you can access global variables declared in one window or frame from another window or frame by specifying the window or frame name. For example, if a variable called phoneNumber is declared in a document, you can refer to this
+variable from an iframe as parent.phoneNumber.</p>
 </article>
 </section>
 <section class="main-section" id="Constants">
 <header>Constants</header>
 <article>
-<p>You can create a read-only, named constant with the const keyword. The syntax of a constant identifier is the same as for a variable identifier: it must start with a letter, underscore or dollar sign and can contain alphabetic, numeric, or underscore characters.</p>
+<p>You can create a read-only, named constant with the const keyword. The syntax of a constant identifier is the same as for a variable identifier: it must start with a letter, underscore or dollar sign and can contain alphabetic, numeric, or
+underscore characters.</p>
 <code>const PI = 3.14;</code>
 <p>A constant cannot change value through assignment or be re-declared while the script is running. It has to be initialized to a value.</p>
 <p>The scope rules for constants are the same as those for let block scope variables. If the const keyword is omitted, the identifier is assumed to represent a variable.</p>
@@ -252,8 +1897,7 @@ function f() {
 const g = 5;
 var g;
 //statements
-}</code>
-However, object attributes are not protected, so the following statement is executed without problems.
+}</code> However, object attributes are not protected, so the following statement is executed without problems.
 <code>const MY_OBJECT = {"key": "value"};
 MY_OBJECT.key = "otherValue";</code>
 </article>
@@ -263,17 +1907,19 @@ MY_OBJECT.key = "otherValue";</code>
 <article>
 <p>The latest ECMAScript standard defines seven data types:</p>
 <ul>
-<li>Six data types that are primitives:<br>
+<li>Six data types that are primitives:</li>
 <ul>
 <li>Boolean. true and false.</li>
 <li>null. A special keyword denoting a null value. Because JavaScript is case-sensitive, null is not the same as Null, NULL, or any other variant.</li>
 <li>undefined. A top-level property whose value is undefined.</li>
 <li>Number. 42 or 3.14159.</li>
 <li>String. "Howdy"</li>
-<li>Symbol (new in ECMAScript 2015). A data type whose instances are unique and immutable.</li></ul>
+<li>Symbol (new in ECMAScript 2015). A data type whose instances are unique and immutable.</li>
+</ul>
 <li>and Object</li>
 </ul>
-Although these data types are a relatively small amount, they enable you to perform useful functions with your applications. Objects and functions are the other fundamental elements in the language. You can think of objects as named containers for values, and functions as procedures that your application can perform.
+Although these data types are a relatively small amount, they enable you to perform useful functions with your applications. Objects and functions are the other fundamental elements in the language. You can think of objects as named containers for values,
+and functions as procedures that your application can perform.
 </article>
 </section>
 <section class="main-section" id="if...else_statement">
@@ -284,8 +1930,8 @@ Use the if statement to execute a statement if a logical condition is true. Use 
 statement_1;
 } else {
 statement_2;
-}</code>
-condition can be any expression that evaluates to true or false. See Boolean for an explanation of what evaluates to true and false. If condition evaluates to true, statement_1 is executed; otherwise, statement_2 is executed. statement_1 and statement_2 can be any statement, including further nested if statements.
+}</code> condition can be any expression that evaluates to true or false. See Boolean for an explanation of what evaluates to true and false. If condition evaluates to true, statement_1 is executed; otherwise, statement_2 is executed. statement_1
+and statement_2 can be any statement, including further nested if statements.
 <p>
 You may also compound the statements using else if to have multiple conditions tested in sequence, as follows:
 </p>
@@ -297,20 +1943,18 @@ statement_2;
 statement_n;
 } else {
 statement_last;
-} </code>
-In the case of multiple conditions only the first logical condition which evaluates to true will be executed. To execute multiple statements, group them within a block statement ({ ... }) . In general, it's good practice to always use block statements, especially when nesting if statements:
+} </code> In the case of multiple conditions only the first logical condition which evaluates to true will be executed. To execute multiple statements, group them within a block statement ({ ... }) . In general, it's good practice to always
+use block statements, especially when nesting if statements:
 <code>if (condition) {
 statement_1_runs_if_condition_is_true;
 statement_2_runs_if_condition_is_true;
 } else {
 statement_3_runs_if_condition_is_false;
 statement_4_runs_if_condition_is_false;
-}</code>
-It is advisable to not use simple assignments in a conditional expression, because the assignment can be confused with equality when glancing over the code. For example, do not use the following code:
+}</code> It is advisable to not use simple assignments in a conditional expression, because the assignment can be confused with equality when glancing over the code. For example, do not use the following code:
 <code>if (x = y) {
 /* statements here */
-}</code>
-If you need to use an assignment in a conditional expression, a common practice is to put additional parentheses around the assignment. For example:
+}</code> If you need to use an assignment in a conditional expression, a common practice is to put additional parentheses around the assignment. For example:
 <code>if ((x = y)) {
 /* statements here */
 }</code>
@@ -321,9 +1965,9 @@ If you need to use an assignment in a conditional expression, a common practice 
 <article>
 A while statement executes its statements as long as a specified condition evaluates to true. A while statement looks as follows:
 <code>while (condition)
-statement</code>
-If the condition becomes false, statement within the loop stops executing and control passes to the statement following the loop.
-<p>The condition test occurs before statement in the loop is executed. If the condition returns true, statement is executed and the condition is tested again. If the condition returns false, execution stops and control is passed to the statement following while.</p>
+statement</code> If the condition becomes false, statement within the loop stops executing and control passes to the statement following the loop.
+<p>The condition test occurs before statement in the loop is executed. If the condition returns true, statement is executed and the condition is tested again. If the condition returns false, execution stops and control is passed to the statement
+following while.</p>
 <p>To execute multiple statements, use a block statement ({ ... }) to group those statements.</p>
 Example:
 <p>The following while loop iterates as long as n is less than three:</p>
@@ -351,7 +1995,8 @@ A function definition (also called a function declaration, or function statement
 <code>function square(number) {
 return number * number;
 }</code>
-<p>The function square takes one argument, called number. The function consists of one statement that says to return the argument of the function (that is, number) multiplied by itself. The return statement specifies the value returned by the function.
+<p>The function square takes one argument, called number. The function consists of one statement that says to return the argument of the function (that is, number) multiplied by itself. The return statement specifies the value returned by the
+function.
 </p>
 <code>return number * number;</code>
 <p>Primitive parameters (such as a number) are passed to functions by value; the value is passed to the function, but if the function changes the value of the parameter, this change is not reflected globally or in the calling function.</p>
@@ -364,9 +2009,46 @@ return number * number;
 </article>
 </section>
 </main>
-</body>
--->
-<body>
-<h1><center>COMING SOON!</h1></center>
+<br>
+</div>
+</div>
+<script>
+function tagSearch() {
+  let input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tagstable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+function styleSearch() {
+  let input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("ssearch");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("stylestable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+    </script>
 </body>
 </html>
