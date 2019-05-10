@@ -4,12 +4,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CodePen - Web Dev Docs</title>
+<title>Web Dev Docs</title>
 
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
 <script src="assets/js/jquery-3.3.1.min.js"></script>
-
 <script src="assets/js/bootstrap.min.js"></script>
 <link rel='stylesheet' href='assets/css/font-awesome.min.css'>
 <style>
@@ -116,9 +114,8 @@ code{
 <code>&lt;img src="https://www.your-image-source.com/your-image.jpg"&gt;</code>
 <p>Note that img elements are self-closing, i.e., they do not require a closing tag.</p>
 <p>All img elements must have an alt attribute. The text inside an alt attribute is used for screen readers to improve accessibility and is displayed if the image fails to load.<br><br>Note: If the image is purely decorative, using an empty alt attribute is a best practice.<br><br>Ideally the alt attribute should not contain special characters unless needed.<br><br>Let's add an alt attribute to our img example above:</p>
-<code>&lt;img src="https://www.your-image-source.com/your-image.jpg" alt="Author standing on a beach with two thumbs up."&gt;</code>
+<code>&lt;img src="assets/images/code.gif" alt="Image of code being typed on a MacBook."&gt;</code>
 <h3>Linking</h3>
-<b><i>NOTE: In case you have any difficulties using links in the Code Cauldron, feel free to save your file and open it in a normal browser</i></b>
 <p>You can use <i>anchor</i> elements to link to content outside of your web page.</p>
 <p><i>anchor</i> elements need a destination web address called an <i>href</i> attribute. They also need anchor text. Here's an example:</p>
 <code>&lt;a href="https://vibhaas.github.io"&gt;this links to vibhaas.github.io&lt;/a&gt;</code>
@@ -137,13 +134,16 @@ code{
 &lt;p&gt;Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.&lt;/p&gt;
 &lt;p&gt;Meowwww loved it, hated it, loved it, hated it yet spill litter box, scratch at owner, destroy all furniture, especially couch or lay on arms while you're using the keyboard. Missing until dinner time toy mouse squeak roll over. With tail in the air lounge in doorway. Man running from cops stops to pet cats, goes to jail.&lt;/p&gt;
 &lt;p&gt;Intently stare at the same spot poop in the plant pot but kitten is playing with dead mouse. Get video posted to internet for chasing red dot leave fur on owners clothes meow to be let out and mesmerizing birds leave fur on owners clothes or favor packaging over toy so purr for no reason. Meow to be let out play time intently sniff hand run outside as soon as door open yet destroy couch.&lt;/p&gt;
-&lt;h5 id="footer"&gt;Copyright Cat Photo App&lt;/h3&gt</code>
+&lt;h5 id="footer"&gt;Copyright Cat Photo App&lt;/h5&gt</code>
 <p>You can nest most elements, including <i>anchor</i>. Nesting refers to placing a tag within another like so:</p>
 <code>&lt;p&gt;this links to &lt;a target="_blank" href="https://vibhaas.github.io"&gt;vibhaas.github.io&lt;/a&gt;&lt;/p&gt;</code>
+<p><b><i>NOTE: In the Code Cauldron, this code opens up in a new window, this is not what usually happens in the browser - it opens in a new tab. You can save this page and open it up in the browser to try it.</i></b></p>
 <p>Sometimes you want to add <i>a</i> elements to your website before you know where they will link. This is also handy when you're changing the behavior of a link using <i>JavaScript</i>, which we'll learn about later. We can do this by using the href attribute, and using it like this:</p>
 <code>&lt;a href="#"&gt;empty link!&lt;/a&gt;</code>
 <p>You can make elements into links by nesting them within an a element. Lets nest an image within an <i>a</i> element. Here's an example:</p>
-<code>&lt;a target="_blank" href="https://google.com"&gt;&lt;img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."&gt;&lt;/a&gt;</code>
+<code>&lt;a target="_blank" href="https://google.com"&gt;&lt;img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."&gt;&lt;/a&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;a target="_blank" href="https://google.com/search?q=vibhaas"&gt;&lt;img src="assets/images/code.gif" alt="Image of code being typed on a MacBook."&gt;&lt;/a&gt;</code>
 <h3>Lists</h3>
 <p>HTML has special tags for formatting lists, which are of two types: Unordered Lists (ul) and Ordered Lists (ol). Each list has List Items (li) in them :-</p>
 <code>&lt;ul&gt;

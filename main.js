@@ -5,17 +5,19 @@ var fs = require('fs');
 
 const {app, BrowserWindow, Menu, ipcMain, dialog} = electron;
 
-let mainWindow;
+var codeCauldron, mainWindow;
 
 var openedFile = undefined;
 var changed = false;
 
 // listen for app to be ready
 app.on('ready', function(){
-  // create new window
+  createCauldron();
+  createMenu(mainMenuTemplate);
+  // create main window
   mainWindow = new BrowserWindow({
-    width: 1281,
-    height: 800,
+    width: 900,
+    height: 600,
     icon: path.join(__dirname, 'assets/icons/png/icon.png')
   });
   // load html file
@@ -24,35 +26,14 @@ app.on('ready', function(){
     protocol: 'file',
     slashes: true
   }));
-  // Quit app when closed
-  mainWindow.on('closed', function (){
-    if (changed == true) {
-      dialog.showMessageBox({type:"question", buttons:["Cancel", "Save and Quit", "Ignore and Quit"], title:"Unsaved file", message:"You did not save the file"}, function(response) {
-        if (response == 0) {
-          return;
-        }
-        else if (response == 1) {
-          goSave();
-          app.quit();
-        }
-        else {
-          app.quit();
-        }
-      });
-    }
-    else {
-      app.quit();
-    }
+  mainWindow.on('close', function (){
+    app.quit();
   });
-  // Build menu from template
-  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-  // Insert menu
-  Menu.setApplicationMenu(mainMenu);
 });
 
 // goSave function
 function goSave() {
-  mainWindow.webContents.send('file:goSave', 'gosave');
+  codeCauldron.webContents.send('file:goSave', 'gosave');
 }
 
 function open(filePath) {
@@ -64,7 +45,7 @@ function open(filePath) {
      // Check file type
      if (path.extname(filePath) == ".html" || path.extname(filePath) == ".htm") {
        // Send the code
-       mainWindow.webContents.send('file:open', data);
+       codeCauldron.webContents.send('file:open', data);
        openedFile = filePath;
        changed = false;
     }
@@ -85,6 +66,14 @@ function save(fileName, content) {
   });
 }
 
+// Catch Window Change (window:codeCauldron || window:editor)
+
+ipcMain.on('window:codeCauldron', function(event, item) {
+  mainWindow.hide();
+  createMenu(cauldronMenuTemplate);
+  codeCauldron.show();
+});
+
 // Catch Save (file:save)
 
 ipcMain.on('file:save', function(event, item) {
@@ -99,8 +88,64 @@ ipcMain.on('file:changed', function(event, item) {
   changed = item;
 });
 
-// Create menu template
+// Create menu templates
 const mainMenuTemplate = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
+        click(){
+          app.quit();
+        }
+      }
+    ]
+  },
+  {
+   label: 'View',
+   submenu: [
+      {
+         role: 'resetzoom'
+      },
+      {
+         role: 'zoomin'
+      },
+      {
+         role: 'zoomout'
+      },
+      {
+         type: 'separator'
+      },
+      {
+         role: 'togglefullscreen'
+      }
+   ]
+  },
+  {
+    label: 'Developer Tools',
+    submenu: [
+      {
+        label: 'Toggle DevTools',
+        accelerator: 'CmdOrCtrl+I',
+        click(item, focusedWindow){
+          focusedWindow.toggleDevTools();
+        }
+      },
+      {
+        label: 'Exam Mode',
+        accelerator: 'CmdOrCtrl+Shift+E',
+        click() {
+          dialog.showMessageBox({type:"info", buttons:["OK"], title:"Feature unavailable", message:"Feature unavailable in this version."});
+        }
+      },
+      {
+        role: 'reload'
+      }
+    ]
+  }
+];
+const cauldronMenuTemplate = [
   {
     label: 'File',
     submenu: [
@@ -213,19 +258,45 @@ const mainMenuTemplate = [
               }
               else if (response == 1) {
                 goSave();
-                app.quit();
+                codeCauldron.hide();
+                mainWindow.show();
+                createMenu(mainMenuTemplate);
               }
               else {
-                app.quit();
+                codeCauldron.hide();
+                mainWindow.show();
+                createMenu(mainMenuTemplate);
               }
             });
           }
           else {
-            app.quit();
+            codeCauldron.hide();
+            mainWindow.show();
+            createMenu(mainMenuTemplate);
           }
         }
       }
     ]
+  },
+  {
+   label: 'View',
+   submenu: [
+      {
+         role: 'resetzoom'
+      },
+      {
+         role: 'zoomin'
+      },
+      {
+         role: 'zoomout'
+      },
+      {
+         type: 'separator'
+      },
+      {
+         role: 'togglefullscreen'
+      }
+   ]
   },
   {
     label: 'Developer Tools',
@@ -251,9 +322,37 @@ const mainMenuTemplate = [
   }
 ];
 
-// If mac, add empty object to menuitem
-if(process.platform == 'darwin'){
-  mainMenuTemplate.unshift({
-    label: ''
+function createCauldron() {
+  // create new window
+  codeCauldron = new BrowserWindow({
+    width: 1281,
+    height: 800,
+    icon: path.join(__dirname, 'assets/icons/png/icon.png'),
+    show: false
   });
+  // load html file
+  codeCauldron.loadURL(url.format({
+    pathname: path.join(__dirname, 'codeCauldron.html'),
+    protocol: 'file',
+    slashes: true
+  }));
+  // Quit app when closed
+  codeCauldron.on('close', function (){
+    mainWindow.show();
+    createMenu(mainMenuTemplate);
+    openedFile = undefined;
+    changed = false;
+    createCauldron();
+  });
+}
+
+function createMenu(temp){
+    var menu = Menu.buildFromTemplate(temp);
+   // If mac, add empty object to menuitem
+   if(process.platform == 'darwin'){
+     menu.unshift({
+       label: ''
+     });
+   }
+    Menu.setApplicationMenu(menu);
 }
