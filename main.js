@@ -1,7 +1,12 @@
+/*
+	HTML Helper 2.8
+	Copyright Vibhaas Srivastava MIT License
+*/
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
 var fs = require('fs');
+var glob = require("glob");
 
 const {app, BrowserWindow, Menu, ipcMain, dialog} = electron;
 
@@ -10,9 +15,14 @@ var codeCauldron, mainWindow;
 var openedFile = undefined;
 var changed = false;
 
+var getDirectories = function (src, callback) {
+  glob(src + '/**/*', callback);
+};
+
 // listen for app to be ready
 app.on('ready', function(){
   createCauldron();
+  createEditor();
   createMenu(mainMenuTemplate);
   // create main window
   mainWindow = new BrowserWindow({
@@ -27,6 +37,14 @@ app.on('ready', function(){
     slashes: true
   }));
   mainWindow.on('close', function (){
+    if (codeCauldron != null && codeCauldron != undefined) {
+      codeCauldron.close();
+      codeCauldron = null;
+    }
+    if (editor != null && editor != undefined) {
+      editor.close();
+      editor = null;
+    }
     app.quit();
   });
 });
@@ -72,6 +90,30 @@ ipcMain.on('window:codeCauldron', function(event, item) {
   mainWindow.hide();
   createMenu(cauldronMenuTemplate);
   codeCauldron.show();
+});
+
+ipcMain.on('window:editor', function(event, item) {
+  let options = {
+   title : "Select project folder",
+   buttonLabel : "Open project folder",
+   properties: ['openDirectory']
+  }
+  dialog.showOpenDialog(options, (dir) => {
+    if(dir === undefined){
+        dialog.showErrorBox("No folder selected!", "No folder selected! Please select a project folder!");
+        return;
+    }
+    getDirectories(dir, function (err, res) {
+      if (err) {
+        dialog.showErrorBox("Error!", "There was an error reading that directory!");
+      } else {
+        mainWindow.hide();
+        createMenu(editorMenuTemplate);
+        editor.show();
+        editor.webContents.send('open:projectFolder', [dir, res]);
+      }
+    });
+  });
 });
 
 // Catch Save (file:save)
@@ -145,6 +187,68 @@ const mainMenuTemplate = [
     ]
   }
 ];
+
+const editorMenuTemplate = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
+        click(){
+          editor.close();
+          editor = null;
+          mainWindow.show();
+          createMenu(mainMenuTemplate);
+          createEditor();
+        }
+      }
+    ]
+  },
+  {
+   label: 'View',
+   submenu: [
+      {
+         role: 'resetzoom'
+      },
+      {
+         role: 'zoomin'
+      },
+      {
+         role: 'zoomout'
+      },
+      {
+         type: 'separator'
+      },
+      {
+         role: 'togglefullscreen'
+      }
+   ]
+  },
+  {
+    label: 'Developer Tools',
+    submenu: [
+      {
+        label: 'Toggle DevTools',
+        accelerator: 'CmdOrCtrl+I',
+        click(item, focusedWindow){
+          focusedWindow.toggleDevTools();
+        }
+      },
+      {
+        label: 'Exam Mode',
+        accelerator: 'CmdOrCtrl+Shift+E',
+        click() {
+          dialog.showMessageBox({type:"info", buttons:["OK"], title:"Feature unavailable", message:"Feature unavailable in this version."});
+        }
+      },
+      {
+        role: 'reload'
+      }
+    ]
+  }
+];
+
 const cauldronMenuTemplate = [
   {
     label: 'File',
@@ -198,7 +302,7 @@ const cauldronMenuTemplate = [
           else {
             dialog.showOpenDialog({
                 title: "Select a file",
-                properties: ["openFile", 'multiSelections']
+                properties: ["openFile"]
             }, (filePaths) => {
                 if(filePaths === undefined){
                     dialog.showErrorBox("No file selected!", "No file selected! Please select a file!");
@@ -343,6 +447,29 @@ function createCauldron() {
     openedFile = undefined;
     changed = false;
     createCauldron();
+  });
+}
+
+function createEditor() {
+  // create new window
+  editor = new BrowserWindow({
+    width: 1281,
+    height: 800,
+    icon: path.join(__dirname, 'assets/icons/png/icon.png'),
+    show: false
+  });
+  // load html file
+  editor.loadURL(url.format({
+    pathname: path.join(__dirname, 'editor.html'),
+    protocol: 'file',
+    slashes: true
+  }));
+  // Quit app when closed
+  editor.on('close', function (){
+    mainWindow.show();
+    createMenu(mainMenuTemplate);
+    // other close stuff
+    createEditor();
   });
 }
 

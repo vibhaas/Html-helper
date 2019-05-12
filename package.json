@@ -28,6 +28,7 @@
   "homepage": "https://github.com/vibhaas/Html-helper#readme",
   "dependencies": {
     "electron": "^4.0.0",
-    "electron-packager": "^13.0.1"
+    "electron-packager": "^13.0.1",
+    "glob": "^7.1.4"
   }
 }

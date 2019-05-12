@@ -1,14 +1,18 @@
 <!--
-	HTML Helper 2.6
+	HTML Helper 2.8
 	Copyright Vibhaas Srivastava MIT License
 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>HTML Helper</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css"> <!-- Font awesome -->
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="assets/js/jquery-3.3.1.min.js"></script>
@@ -122,7 +126,7 @@
         <p class="lead" id="quote">Use the Cauldron for the fun stuff, and the Editor for serious stuff!</p>
         <p class="lead">
           <a href="#" onclick="codeCauldron();" class="btn btn-lg btn-secondary">Code Cauldron</a>
-          <a href="#" class="btn btn-lg btn-secondary">Editor</a>
+          <a href="#" onclick="editor();" class="btn btn-lg btn-secondary">Editor</a>
         </p>
         </div>
         </div>

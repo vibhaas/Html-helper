@@ -1,14 +1,17 @@
 <!--
-	HTML Helper 2.6
+	HTML Helper 2.8
 	Copyright Vibhaas Srivastava MIT License
 -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title id="ptitle">Code Cauldron</title>
 		<!-- CSS -->
     <link rel="stylesheet" href="assets/css/materialize.min.css">
+		<link rel="stylesheet" href="assets/css/all.min.css">  <!-- Font awesome -->
 		<style media="screen">
 			@font-face {
 			  font-family: 'Material Icons';
@@ -447,7 +450,7 @@
 					var highlightLine = (localStorage.wordWrapping == undefined) || (localStorage.highlightLine == 'true');
 					var printMargin = (localStorage.wordWrapping == undefined) || (localStorage.printMargin == 'true');
 					var autoSave = (localStorage.wordWrapping == undefined) || (localStorage.autoSave == 'true');
-					$("#title").get(0).value = localStorage.title || '';
+					$("#title").get(0).value ='';
 					// creating the editors
 			    ace.require("ace/ext/language_tools");
 					var htmleditor = ace.edit("htmleditor");
@@ -544,60 +547,20 @@
 							exec: save,
 							bindKey: { win: "ctrl-s", mac: "cmd-s" }
 					});
-					htmleditor.commands.addCommand({
-							name: "undo",
-							exec: htmleditor.undo(),
-							bindKey: { win: "ctrl-z", mac: "cmd-z" }
-					});
-					htmleditor.commands.addCommand({
-							name: "redo",
-							exec: htmleditor.redo(),
-							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
-					});
 					csseditor.commands.addCommand({
 							name: "save",
 							exec: save,
 							bindKey: { win: "ctrl-s", mac: "cmd-s" }
-					});
-					csseditor.commands.addCommand({
-							name: "undo",
-							exec: csseditor.undo(),
-							bindKey: { win: "ctrl-z", mac: "cmd-z" }
-					});
-					csseditor.commands.addCommand({
-							name: "redo",
-							exec: csseditor.redo(),
-							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
 					});
 					jseditor.commands.addCommand({
 							name: "save",
 							exec: save,
 							bindKey: { win: "ctrl-s", mac: "cmd-s" }
 					});
-					jseditor.commands.addCommand({
-							name: "undo",
-							exec: jseditor.undo(),
-							bindKey: { win: "ctrl-z", mac: "cmd-z" }
-					});
-					jseditor.commands.addCommand({
-							name: "redo",
-							exec: jseditor.redo(),
-							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
-					});
 					metadata.commands.addCommand({
 							name: "save",
 							exec: save,
 							bindKey: { win: "ctrl-s", mac: "cmd-s" }
-					});
-					metadata.commands.addCommand({
-							name: "undo",
-							exec: metadata.undo(),
-							bindKey: { win: "ctrl-z", mac: "cmd-z" }
-					});
-					metadata.commands.addCommand({
-							name: "redo",
-							exec: metadata.redo(),
-							bindKey: { win: "ctrl-shift-z", mac: "cmd-shift-z" }
 					});
 			</script>
 	</body>

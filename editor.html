@@ -1,0 +1,501 @@
+<!--
+	HTML Helper 2.8
+	Copyright Vibhaas Srivastava MIT License
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor - Html Helper</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">  <!-- Font awesome -->
+    <link rel="stylesheet" href="assets/css/jstree.min.css">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/ace/src-noconflict/ace.js"></script>
+    <script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
+    <script src="assets/js/jstree.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
+
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+      }
+
+      .editor-wrapper {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .editor-sidebar {
+        flex: 0 0 250px;
+        max-width: 250px;
+        background-color: #EEEEEE;
+      }
+      .editor-sidebar .editor-sidebar-tabs {
+        display: flex;
+        align-items: flex-end;
+        height: 50px;
+        padding-right: 8px;
+        padding-left: 8px;
+        background-color: #e1e1e1;
+      }
+      .editor-sidebar .editor-sidebar-tabs .nav {
+        width: 100%;
+      }
+      .editor-sidebar .editor-sidebar-tabs .nav li a {
+        padding-right: 20px;
+        padding-left: 20px;
+        color: #333;
+      }
+
+      .editor-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0;
+        max-width: 100%;
+      }
+
+      .editor-top-bar {
+        display: flex;
+        width: 100%;
+        flex: 0 0 50px;
+        background-color: #EF3432;
+      }
+
+      .editor-tabs {
+        display: flex;
+        flex: 1 0 0;
+        align-items: flex-end;
+      }
+      .editor-tabs .editor-tab {
+        display: flex;
+        align-items: center;
+        margin-left: 4px;
+        padding: 10px 15px;
+        background-color: #c5110f;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 0;
+      }
+      .editor-tabs .editor-tab-active {
+        background-color: #20201D;
+      }
+      .editor-tabs .editor-tab-active.editor-tab:hover .editor-close-tab .close-icon-circle {
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .editor-tabs .editor-tab:hover .editor-close-tab .close-icon-circle {
+        color: rgba(51, 51, 51, 0.3);
+      }
+      .editor-tabs .editor-tab .editor-close-tab {
+        margin-left: 10px;
+        padding: 0;
+        background-color: transparent;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+        border: 0;
+        font-size: 5px;
+      }
+      .editor-tabs .editor-tab .editor-close-tab:hover .close-icon-circle {
+        color: rgba(51, 51, 51, 0.5);
+      }
+      .editor-tabs .editor-tab .editor-close-tab:hover .close-icon-x {
+        color: white;
+      }
+      .editor-tabs .editor-tab .editor-close-tab .close-icon-circle {
+        color: rgba(51, 51, 51, 0);
+        transition: color .1s ease-in-out;
+      }
+      .editor-tabs .editor-tab .editor-close-tab .close-icon-x {
+        color: rgba(255, 255, 255, 0.5);
+        transition: color .1s ease-in-out;
+      }
+
+      .editor-main {
+        display: flex;
+        flex: 1 0 0;
+        max-height: 100%;
+      }
+
+      .editor-workspace {
+        flex: 1 0 0;
+        overflow: auto;
+      }
+
+      .editor-workspace #ace-editor {
+        height: 100%;
+        font-size: 18px;
+      }
+
+      .editor-preview {
+        position: relative;
+        flex: 0 0 0;
+        max-width: 0;
+        background-color: white;
+        transition: .1s ease-in-out;
+      }
+
+      .editor-preview-toggle {
+        background-color: orange;
+        z-index: 10;
+      }
+
+      .editor-preview-inner {
+        oveflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+
+      .editor-preview-inner iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      .editor-preview.show {
+        flex: 0 0 400px;
+        max-width: 400px;
+      }
+
+      .editor-status-bar {
+        background-color: whitesmoke;
+        text-align: right;
+        color: gray;
+        font-size: 13px;
+      }
+      .status-title {
+        display: none;
+        color: black;
+        font-size: 14px;
+      }
+      .status-title.show {
+        text-align: left;
+        display: block;
+      }
+  </style>
+  <script>
+    const electron = require("electron");
+    const {ipcRenderer} = electron;
+
+    function write(iframe, content)	{
+      iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+      iframe.document.open();
+      iframe.document.write(content);
+      iframe.document.close();
+    }
+
+    function update()	{
+      let content = editor.getValue();
+      write($('#display').get(0), content);
+      page = document.createElement( 'html' );
+      page.innerHTML = content;
+      let title = '';
+      if(page.getElementsByTagName("TITLE")[0] != undefined) {
+        title = page.getElementsByTagName("TITLE")[0].innerHTML;
+      }
+      $("#statusTitle").html(title);
+      // title handler
+    }
+
+    function save() {
+      alert('You pressed save!');
+    }
+    function eset() {
+      theme = $('#theme').get(0).value;
+      tabSize = $('#tab-size').get(0).value;
+      fontSize = $('#font-size').get(0).value;
+      wordWrapping = $('#word-wrapping').is(":checked");
+      softTab = $('#soft-tab').is(":checked");
+      highlightLine = $('#highlight-line').is(":checked");
+      printMargin = $('#print-margin').is(":checked");
+      localStorage.theme = theme;
+      editor.setTheme("ace/theme/" + theme);
+      localStorage.tabSize = tabSize;
+      editor.session.setTabSize(tabSize);
+      localStorage.fontSize = fontSize;
+      $("#ace-editor").css("font-size", fontSize+"px");
+      localStorage.wordWrapping = wordWrapping;
+      editor.session.setUseWrapMode(wordWrapping)
+      localStorage.softTab = softTab;
+      editor.session.setUseSoftTabs(softTab);
+      localStorage.highlightLine = highlightLine;
+      editor.setHighlightActiveLine(highlightLine);
+      localStorage.printMargin = printMargin;
+      editor.setShowPrintMargin(printMargin);
+    }
+    function esetload(){
+      $('#theme option[value='+localStorage.theme+']').prop('selected', true);
+      $('#tab-size option[value='+tabSize+']').prop('selected', true);
+      $('#font-size option[value='+fontSize+']').prop('selected', true);
+      $('#word-wrapping').prop('checked', wordWrapping);
+      $('#soft-tab').prop('checked', softTab);
+      $('#highlight-line').prop('checked', highlightLine);
+      $('#print-margin').prop('checked', printMargin);
+    }
+
+    function open(dirs) {
+      console.log(dirs[0][0].split('\\').pop().split('/').pop());
+      console.log(dirs[1]);
+    }
+
+    ipcRenderer.on('open:projectFolder', function(event, item) {
+      open(item);
+    });
+  </script>
+  </head>
+  <body>
+    <div class="editor-wrapper">
+    	<div class="editor-sidebar">
+    		<div class="editor-sidebar-tabs">
+    			<ul class="nav nav-tabs" role="tablist">
+    				<li class="nav-item">
+    					<a class="nav-link active" role="tab" aria-controls="files" aria-selected="true" data-toggle="tab" href="#files">
+    						<i class="fas fa-file"></i>
+    					</a>
+    				</li>
+    				<li class="nav-item">
+    					<a class="nav-link" role="tab" aria-controls="projesett" aria-selected="true" data-toggle="tab" href="#projsett">
+    						<i class="fas fa-cog"></i>
+    					</a>
+    				</li>
+    			</ul>
+    		</div>
+        <div class="tab-content">
+          <div class="tab-pane fade show active editor-files" id="files">
+      			<div id="editor-file-tree"></div>
+      		</div>
+          <div class="tab-pane fade container editor-files" id="projsett">
+            <h5>Editor Settings</h5>
+            <div class="form-group">
+              <label for="theme">Theme</label>
+              <select class="form-control" id="theme" onchange="eset();">
+                <option value="ambiance">ambiance</option>
+                <option value="chaos">chaos</option>
+                <option value="chrome">chrome</option>
+                <option value="clouds">clouds</option>
+                <option value="clouds_midnight">clouds_midnight</option>
+                <option value="cobalt">cobalt</option>
+                <option value="crimson_editor">crimson_editor</option>
+                <option value="dawn">dawn</option>
+                <option value="dracula">dracula</option>
+                <option value="dreamweaver">dreamweaver</option>
+                <option value="eclipse">eclipse</option>
+                <option value="github">github</option>
+                <option value="gob">gob</option>
+                <option value="gruvbox">gruvbox</option>
+                <option value="idle_fingers">idle_fingers</option>
+                <option value="iplastic">iplastic</option>
+                <option value="katzenmilch">katzenmilch</option>
+                <option value="kr_theme">kr_theme</option>
+                <option value="kuorir">kuorir</option>
+                <option value="merbivore">merbivore</option>
+                <option value="merbivore_soft">merbivore_soft</option>
+                <option value="mono_industrial">mono_industrial</option>
+                <option value="monokai">monokai</option>
+                <option value="pastel_on_dark">pastel_on_dark</option>
+                <option value="solarized_dark">solarized_dark</option>
+                <option value="solarized_light">solarized_light</option>
+                <option value="sqlserver">sqlserver</option>
+                <option value="terminal">terminal</option>
+                <option value="textmate">textmate</option>
+                <option value="tomorrow" selected>tomorrow</option>
+                <option value="tomorrow_night">tomorrow_night</option>
+                <option value="tomorrow_night_blue">tomorrow_night_blue</option>
+                <option value="tomorrow_night_bright">tomorrow_night_bright</option>
+                <option value="tomorrow_night_eighties">tomorrow_night_eighties</option>
+                <option value="twilight">twilight</option>
+                <option value="vibrant_ink">vibrant_ink</option>
+                <option value="xcode">xcode</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tab-size">Tab Size</label>
+              <select class="form-control" id="tab-size" onchange="eset();">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="font-size">Font Size</label>
+              <select class="form-control" id="font-size" onchange="eset();">
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="28">28</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+            <div class="checkbox">
+              <p>
+                <label>
+                  <input type="checkbox" id="word-wrapping" onchange="eset();"/>
+                  <span>Word Wrapping</span>
+                </label>
+              </p>
+            </div>
+            <div class="checkbox">
+              <p>
+                <label>
+                  <input type="checkbox" id="highlight-line" onchange="eset();"/>
+                  <span>Highlight Line</span>
+                </label>
+              </p>
+            </div>
+            <div class="checkbox">
+              <p>
+                <label>
+                  <input type="checkbox" id="soft-tab" onchange="eset();"/>
+                  <span>Soft Tab</span>
+                </label>
+              </p>
+            </div>
+            <div class="checkbox">
+              <p>
+                <label>
+                  <input type="checkbox" id="print-margin" onchange="eset();"/>
+                  <span>Print Margin</span>
+                </label>
+              </p>
+            </div>
+          </div>
+        </div>
+    	</div>
+    	<main class="editor-container">
+    		<div class="editor-top-bar">
+    			<div class="editor-tabs">
+    				<div class="editor-tab editor-tab-active">
+    					file1.js
+    					<button class="editor-close-tab">
+    						<span class="fa-stack fa-2x">
+    						  <i class="fas fa-circle fa-stack-2x close-icon-circle"></i>
+    						  <i class="fas fa-times fa-stack-1x fa-inverse close-icon-x"></i>
+    						</span>
+    					</button>
+    				</div>
+    				<div class="editor-tab">
+    					file2.twig
+    					<button class="editor-close-tab">
+    						<span class="fa-stack fa-2x">
+    						  <i class="fas fa-circle fa-stack-2x close-icon-circle"></i>
+    						  <i class="fas fa-times fa-stack-1x fa-inverse close-icon-x"></i>
+    						</span>
+    					</button>
+    				</div>
+    			</div>
+    			<button class="btn" style="border-radius:0px;" onclick="update();">
+    				<i class="fas fa-redo"></i>
+    			</button>
+    			<button class="btn editor-preview-toggle" style="border-radius:0px;">
+    				<i class="fas fa-laptop"></i>
+    			</button>
+    		</div>
+    		<div class="editor-main">
+    			<div class="editor-workspace">
+    				<div id="ace-editor"></div>
+    			</div>
+    			<div class="editor-preview">
+    				<div class="editor-preview-inner">
+    					<iframe src="about:blank" id="display"></iframe>
+    				</div>
+    			</div>
+    		</div>
+        <div class="editor-status-bar">
+          <div class="status-title" id="statusTitle"></div>
+    			<span id="filename"></span> <span id="cursorpos"></span> <span id="filetype"></span> <span id="datetime"></span>
+    		</div>
+    	</main>
+    </div>
+    <script>
+      // ace variables
+      var theme = "ace/theme/" + localStorage.theme || "tomorrow";
+      var tabSize = localStorage.tabSize || 2;
+      var fontSize = localStorage.fontSize || 18;
+      var wordWrapping = (localStorage.wordWrapping == undefined) || (localStorage.wordWrapping == 'true');
+      var softTab = (localStorage.wordWrapping == undefined) || (localStorage.softTab == 'true');
+      var highlightLine = (localStorage.wordWrapping == undefined) || (localStorage.highlightLine == 'true');
+      var printMargin = (localStorage.wordWrapping == undefined) || (localStorage.printMargin == 'true');
+
+      var editor = ace.edit("ace-editor");
+      editor.session.setMode("ace/mode/html");
+      editor.setTheme(theme);
+      editor.session.setTabSize(tabSize);
+      $("#ace-editor").css("font-size", fontSize+"px");
+      editor.session.setUseWrapMode(wordWrapping);
+      editor.session.setUseSoftTabs(softTab);
+      editor.setHighlightActiveLine(false);
+      editor.setShowPrintMargin(printMargin);
+      editor.setReadOnly(false);
+
+      editor.setOptions({
+          enableBasicAutocompletion: true,
+          enableSnippets: true,
+          enableLiveAutocompletion: true
+      });
+      editor.commands.addCommand({
+          name: "save",
+          exec: save,
+          bindKey: { win: "ctrl-s", mac: "cmd-s" }
+      });
+
+      esetload();
+
+      $('.editor-preview-toggle').on('click', function() {
+      	$('.editor-preview').toggleClass('show');
+        $('.status-title').toggleClass('show');
+        update();
+      	setTimeout( function() {
+      		editor.resize(true)
+      	}
+      	, 100);
+      });
+
+      // cursor position
+      $("#cursorpos").html(editor.getCursorPosition().row+":"+editor.getCursorPosition().column);
+      editor.session.selection.on('changeCursor', function(){
+        $("#cursorpos").html(editor.getCursorPosition().row+":"+editor.getCursorPosition().column);
+      });
+
+      var jstree = $('#editor-file-tree').jstree();
+
+      jstree.bind("dblclick.jstree", function (event) {
+         var node = $(event.target).closest("li");
+         var data = node.data("jstree");
+         // Do my action
+      });
+
+      // Date and Time
+      setInterval(function(){
+        let dt = new Date();
+        $("#datetime").html(dt.toLocaleString());
+      }, 1000);
+    </script>
+  </body>
+</html>
