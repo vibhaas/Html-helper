@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">  <!-- Font awesome -->
-    <link rel="stylesheet" href="assets/css/jstree.min.css">
+    <link rel="stylesheet" href="assets/css/jstree/default/style.min.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="assets/js/jquery-3.3.1.min.js"></script>
@@ -20,6 +20,7 @@
     <script src="assets/ace/src-noconflict/ace.js"></script>
     <script src="assets/ace/src-noconflict/ext-language_tools.js"></script>
     <script src="assets/js/jstree.min.js"></script>
+    <script src="assets/js/arrangeIntoTree.js"></script>
     <script>if (window.module) module = window.module;</script>
 
     <style>
@@ -243,14 +244,10 @@
       $('#print-margin').prop('checked', printMargin);
     }
 
-    function open(dirs) {
-      console.log(dirs[0][0].split('\\').pop().split('/').pop());
-      console.log(dirs[1]);
+    function open(file) {
+
     }
 
-    ipcRenderer.on('open:projectFolder', function(event, item) {
-      open(item);
-    });
   </script>
   </head>
   <body>
@@ -272,10 +269,10 @@
     		</div>
         <div class="tab-content">
           <div class="tab-pane fade show active editor-files" id="files">
-      			<div id="editor-file-tree"></div>
+      			<div id="editor-file-tree">rtr</div>
       		</div>
           <div class="tab-pane fade container editor-files" id="projsett">
-            <h5>Editor Settings</h5>
+            <br>
             <div class="form-group">
               <label for="theme">Theme</label>
               <select class="form-control" id="theme" onchange="eset();">
@@ -322,7 +319,7 @@
               <label for="tab-size">Tab Size</label>
               <select class="form-control" id="tab-size" onchange="eset();">
                 <option value="1">1</option>
-                <option value="2">2</option>
+                <option value="2" selected>2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -343,7 +340,7 @@
                 <option value="16">16</option>
                 <option value="17">17</option>
                 <option value="18">18</option>
-                <option value="19">19</option>
+                <option value="19" selected>19</option>
                 <option value="20">20</option>
                 <option value="22">22</option>
                 <option value="24">24</option>
@@ -384,6 +381,9 @@
                   <span>Print Margin</span>
                 </label>
               </p>
+            </div>
+            <div>
+              <p style="color: gray; font-size: 13px;">You can use more advanced settings by pressing <i>Ctrl+&lt;</i> inside the editor</p>
             </div>
           </div>
         </div>
@@ -429,7 +429,7 @@
     		</div>
         <div class="editor-status-bar">
           <div class="status-title" id="statusTitle"></div>
-    			<span id="filename"></span> <span id="cursorpos"></span> <span id="filetype"></span> <span id="datetime"></span>
+    			<span id="cursorpos"></span>&nbsp;&nbsp;&nbsp;<span id="datetime"></span>
     		</div>
     	</main>
     </div>
@@ -483,12 +483,33 @@
         $("#cursorpos").html(editor.getCursorPosition().row+":"+editor.getCursorPosition().column);
       });
 
-      var jstree = $('#editor-file-tree').jstree();
+      ipcRenderer.on('open:projectFolder', function(event, dirs) {
+        let pname = dirs[0][0].split('\\').pop().split('/').pop(); // Extracting root folder
+        let i;
+        for (i = 0; i < dirs[1].length; i++) { // Replacing all the rootpaths
+          dirs[1][i] = dirs[1][i].replace(dirs[0][0]+"/", "").split('/');
+          dirs[1][i].unshift(pname);
+        }
+        dirs[1].unshift([pname]);
 
-      jstree.bind("dblclick.jstree", function (event) {
-         var node = $(event.target).closest("li");
-         var data = node.data("jstree");
-         // Do my action
+        console.log(dirs[1]);
+
+        var jstreeObject = arrangeIntoTree(dirs[1]); // arranging them
+
+        console.log(jstreeObject);
+
+        var jstree = $('#editor-file-tree').jstree(
+          { 'core' : {
+            'data' : jstreeObject
+          }
+        });
+
+/*        jstree.bind("dblclick.jstree", function (event) {
+           var node = $(event.target).closest("li");
+           var data = node.data("jstree");
+           // Do my action
+        });
+*/
       });
 
       // Date and Time
